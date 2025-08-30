@@ -1,146 +1,436 @@
-import React, { Component } from "react";
-import { Row, Col, Card, Typography, Button } from "antd";
-import styles from "@/styles/about-us/AboutPage.module.css";
+import React from "react";
+import Head from "next/head";
+import { Row, Col, Card, Typography, Space, Divider, Image } from "antd";
+import {
+  TrophyOutlined,
+  CheckCircleOutlined,
+  TruckOutlined,
+  SmileOutlined,
+  ShoppingOutlined,
+  FireOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
+import styles from "@/styles/about-us/AboutUs.module.css";
 
-const { Title, Paragraph } = Typography;
+const { Title, Paragraph, Text } = Typography;
 
-class AboutPage extends Component {
+class AboutUsPage extends React.Component {
+  renderHero() {
+    return (
+      <section className={styles.heroSection}>
+        <div className={styles.overlay}></div>
+        <div className={styles.hero}>
+          <Title style={{ color: "#fff" }}>About Us</Title>
+          <Text style={{ color: "#fff" }}>Home / About Us</Text>
+        </div>
+      </section>
+    );
+  }
+
+  renderStory() {
+    return (
+      <section className={styles.storySection}>
+        <div className={styles.storyContainer}>
+          <div className={styles.storyContent}>
+            <div className={styles.imageFlexRow}>
+              <div
+                className={`${styles.storyImgBox} ${styles.imgContainerLeft}`}
+              >
+                <div className={styles.imgBoxLeft}>
+                  <img src="/assets/bg/bg-cat2.jpg" alt="Story 1" />
+                </div>
+              </div>
+              <div
+                className={`${styles.storyImgBox} ${styles.imgContainerRight}`}
+              >
+                <div className={styles.imgBoxRight}>
+                  <img src="/assets/bg/bg-cat2.jpg" alt="Story 2" />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.textBox}>
+              <div className={styles.titleStory}>
+                <span className={styles.titleLine}></span>
+                <Text className={styles.smallTitle}>Our Story</Text>
+              </div>
+              <Title level={2} className={styles.bigTitle}>
+                The Journey Behind Every Step
+              </Title>
+
+              <Text className={styles.storyValueText}>
+                Since 2015, we have been driven by one mission: to bring
+                authentic sneakers from the world’s top brands into everyone’s
+                hands. With more than 10 years of experience, we have proudly
+                served hundreds of thousands of satisfied customers, both
+                locally and internationally.
+              </Text>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  renderWhatWeSell() {
+    return (
+      <section className={styles.sectionAlt}>
+        <Title level={2}>What We Sell</Title>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={8}>
+            <Card hoverable>
+              <ShoppingOutlined
+                style={{ fontSize: 36, color: "#1677ff", marginBottom: 12 }}
+              />
+              <Title level={4}>Sneakers</Title>
+              <Paragraph>
+                Koleksi sneakers dari berbagai brand populer, cocok untuk gaya
+                casual maupun streetwear.
+              </Paragraph>
+            </Card>
+          </Col>
+          <Col xs={24} md={8}>
+            <Card hoverable>
+              <FireOutlined
+                style={{ fontSize: 36, color: "#1677ff", marginBottom: 12 }}
+              />
+              <Title level={4}>Running Shoes</Title>
+              <Paragraph>
+                Sepatu lari dengan teknologi terbaru untuk menunjang performa
+                olahraga Anda.
+              </Paragraph>
+            </Card>
+          </Col>
+          <Col xs={24} md={8}>
+            <Card hoverable>
+              <TrophyOutlined
+                style={{ fontSize: 36, color: "#1677ff", marginBottom: 12 }}
+              />
+              <Title level={4}>Limited Editions</Title>
+              <Paragraph>
+                Rilisan terbatas dan kolaborasi eksklusif untuk para kolektor
+                sepatu sejati.
+              </Paragraph>
+            </Card>
+          </Col>
+        </Row>
+      </section>
+    );
+  }
+
+  renderAchievements() {
+    return (
+      <section className={styles.achievementSection}>
+        <div className={styles.overlay} />
+        <div className={styles.achievementContent}>
+          <div className={styles.achievementCard} variant="borderless">
+            <TrophyOutlined className={styles.icon} />
+            <Text className={styles.cardTitle}>Years of Experience</Text>
+            <span className={styles.cardDivider}></span>
+            <Text className={styles.cardValue}>10+</Text>
+          </div>
+
+          <div className={styles.achievementCard} variant="borderless">
+            <SmileOutlined className={styles.icon} />
+            <Text className={styles.cardTitle}>Happy Customers</Text>
+            <span className={styles.cardDivider}></span>
+            <Text className={styles.cardValue}>500k+</Text>
+          </div>
+
+          <div className={styles.achievementCard} variant="borderless">
+            <CheckCircleOutlined className={styles.icon} />
+            <Text className={styles.cardTitle}>Pairs of Shoes Sold</Text>
+            <span className={styles.cardDivider}></span>
+            <Text className={styles.cardValue}>1M+</Text>
+          </div>
+
+          <div className={styles.achievementCard} variant="borderless">
+            <TruckOutlined className={styles.icon} />
+            <Text className={styles.cardTitle}>International Orders</Text>
+            <span className={styles.cardDivider}></span>
+            <Text className={styles.cardValue}>100+</Text>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  renderWhyChooseUs() {
+    return (
+      <section className={styles.whyChooseSection}>
+        <div className={styles.whyChooseContainer}>
+          <Text
+            type="secondary"
+            style={{ textTransform: "uppercase", letterSpacing: 2 }}
+          >
+            Our Commitment
+          </Text>
+          <Title level={2} style={{ marginTop: 0 }}>
+            Why Step With Us?
+          </Title>
+          <div className={styles.whyChooseCardContainer}>
+            <div className={styles.whyChooseCardBox}>
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: "50%",
+                  width: "90px",
+                  height: "90px",
+                  border: "3px dashed #a3a3a3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-5px",
+                    left: "0px",
+                    backgroundColor: "#cfcfcf",
+                    color: "#555555",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    borderRadius: "50%",
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px dashed #a3a3a3",
+                  }}
+                >
+                  1
+                </span>
+                <CheckCircleOutlined className={styles.whyChooseCardIcon} />
+              </div>
+              <Title level={4} className={styles.whyChooseCardTitle}>
+                100% Original Guarantee
+              </Title>
+              <Text className={styles.whyChooseCardValue}>
+                All our shoes come with an authentic guarantee. We work directly
+                with trusted and official distributors.
+              </Text>
+            </div>
+            <div className={styles.whyChooseCardBox}>
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: "50%",
+                  width: "90px",
+                  height: "90px",
+                  border: "3px dashed #a3a3a3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-5px",
+                    left: "0px",
+                    backgroundColor: "#cfcfcf",
+                    color: "#555555",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    borderRadius: "50%",
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px dashed #a3a3a3",
+                  }}
+                >
+                  2
+                </span>
+                <TruckOutlined className={styles.whyChooseCardIcon} />
+              </div>
+              <Title level={4} className={styles.whyChooseCardTitle}>
+                Fast & Secure Shipping
+              </Title>
+              <Text className={styles.whyChooseCardValue}>
+                Quick delivery worldwide with secure packaging to ensure your
+                shoes arrive safely.
+              </Text>
+            </div>
+            <div className={styles.whyChooseCardBox}>
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: "50%",
+                  width: "90px",
+                  height: "90px",
+                  border: "3px dashed #a3a3a3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-5px",
+                    left: "0px",
+                    backgroundColor: "#cfcfcf",
+                    color: "#555555",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    borderRadius: "50%",
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px dashed #a3a3a3",
+                  }}
+                >
+                  3
+                </span>
+                <SmileOutlined className={styles.whyChooseCardIcon} />
+              </div>
+              <Title level={4} className={styles.whyChooseCardTitle}>
+                Responsive Customer Care
+              </Title>
+              <Text className={styles.whyChooseCardValue}>
+                Our support team is ready 24/7 to ensure a smooth and satisfying
+                shopping experience.
+              </Text>
+            </div>
+            <div className={styles.whyChooseCardBox}>
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: "50%",
+                  width: "90px",
+                  height: "90px",
+                  border: "3px dashed #a3a3a3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-5px",
+                    left: "0px",
+                    backgroundColor: "#cfcfcf",
+                    color: "#555555",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    borderRadius: "50%",
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px dashed #a3a3a3",
+                  }}
+                >
+                  4
+                </span>
+                <StarOutlined className={styles.whyChooseCardIcon} />
+              </div>
+              <Title level={4} className={styles.whyChooseCardTitle}>
+                Exclusive Sneaker Collections
+              </Title>
+              <Text className={styles.whyChooseCardValue}>
+                Limited edition sneakers only available in our store, giving you
+                that hype vibe.
+              </Text>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  renderBrands() {
+    return (
+      <section className={styles.brandSection}>
+        <div className={styles.brandFlex}>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/nike.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/onitsuka.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/nb.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/cons.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/jordan.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/vans.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/puma.png" />
+          </div>
+          <div className={styles.brandItem}>
+            <Image width={100} src="/assets/brand/adidas.png" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  renderGallery() {
+    return (
+      <section className={styles.gallerySection}>
+        <div className={styles.overlay}></div>
+        <div className={styles.galleryContainer}>
+          <div className={styles.textGallery}>
+            <Text className={styles.descTextGallery}>
+              Discover a curated collection of our finest moments and creative
+              works. Each piece tells a story, capturing the essence of style,
+              passion, and innovation that drives us forward.
+            </Text>
+
+            <div className={styles.titleGallery}>
+              <span className={styles.titleLine}></span>
+              <Text className={styles.smallTitle}>COLLECTION</Text>
+            </div>
+          </div>
+
+          <div className={styles.cardWrapper}>
+            <div className={styles.cardItem}>CARD 1</div>
+            <div className={styles.cardItem}>CARD 2</div>
+            <div className={styles.cardItem}>CARD 3</div>
+            <div className={styles.cardItem}>CARD 3</div>
+          </div>
+
+          <div className={styles.bottomText}>
+            <Text className={styles.ourText}>OUR</Text>
+            <span className={styles.lineBottomGallery}></span>
+            <Text className={styles.galleryText}>GALLERY</Text>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   render() {
     return (
-      <div className={styles.container}>
-        {/* Hero Section */}
-        <div className={styles.hero}>
-          <Title level={1} style={{ color: "#fff" }}>
-            Tentang Kami
-          </Title>
-          <Paragraph style={{ color: "#ddd" }}>
-            Kami hadir untuk pecinta sneakers di Indonesia. Menyediakan sepatu
-            original, trendy, dan nyaman untuk semua.
-          </Paragraph>
-          <Button type="primary" size="large">
-            Belanja Sekarang
-          </Button>
-        </div>
-
-        {/* Our Story */}
-        <div className={styles.section}>
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={12}>
-              <img
-                src="/images/story.jpg"
-                alt="Our Story"
-                className={styles.image}
-              />
-            </Col>
-            <Col xs={24} md={12}>
-              <Title level={2}>Our Story</Title>
-              <Paragraph>
-                Dimulai dari hobi mengoleksi sneakers, kami percaya setiap orang
-                berhak punya sepatu keren dengan harga terjangkau. Dengan
-                semangat itu, lahirlah brand ini untuk mendekatkan sneakers
-                berkualitas ke semua orang.
-              </Paragraph>
-            </Col>
-          </Row>
-        </div>
-
-        {/* Mission & Vision */}
-        <div className={styles.section}>
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={12}>
-              <Card>
-                <Title level={3}>Visi</Title>
-                <Paragraph>
-                  Menjadi platform sneaker terpercaya dan terlengkap di
-                  Indonesia.
-                </Paragraph>
-              </Card>
-            </Col>
-            <Col xs={24} md={12}>
-              <Card>
-                <Title level={3}>Misi</Title>
-                <Paragraph>
-                  - Menyediakan produk original & terjamin <br />
-                  - Pengiriman cepat dan aman <br />- Memberikan pelayanan
-                  terbaik kepada customer
-                </Paragraph>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-
-        {/* Keunggulan */}
-        <div className={styles.section}>
-          <Title level={2} style={{ textAlign: "center" }}>
-            Kenapa Pilih Kami?
-          </Title>
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={8}>
-              <Card className={styles.card}>
-                <Title level={4}>100% Original</Title>
-                <Paragraph>Produk dijamin authentic & bergaransi.</Paragraph>
-              </Card>
-            </Col>
-            <Col xs={24} md={8}>
-              <Card className={styles.card}>
-                <Title level={4}>Pengiriman Cepat</Title>
-                <Paragraph>Paket aman sampai tujuan dengan tracking.</Paragraph>
-              </Card>
-            </Col>
-            <Col xs={24} md={8}>
-              <Card className={styles.card}>
-                <Title level={4}>Harga Bersaing</Title>
-                <Paragraph>
-                  Sneakers keren dengan harga terbaik di kelasnya.
-                </Paragraph>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-
-        {/* Testimonials */}
-        <div className={styles.section}>
-          <Title level={2} style={{ textAlign: "center" }}>
-            Apa Kata Mereka
-          </Title>
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={8}>
-              <Card>
-                <Paragraph>
-                  "Sepatunya original, pengiriman cepat, recommended seller!"
-                </Paragraph>
-                <b>- Andi</b>
-              </Card>
-            </Col>
-            <Col xs={24} md={8}>
-              <Card>
-                <Paragraph>
-                  "Pilihan banyak banget, CS ramah, pasti repeat order lagi."
-                </Paragraph>
-                <b>- Sinta</b>
-              </Card>
-            </Col>
-            <Col xs={24} md={8}>
-              <Card>
-                <Paragraph>
-                  "Packaging rapi, sneakers sesuai ekspektasi. Mantap!"
-                </Paragraph>
-                <b>- Budi</b>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-
-        {/* CTA */}
-        <div className={styles.cta}>
-          <Title level={2}>Siap cari sneakers favoritmu?</Title>
-          <Button type="primary" size="large">
-            Mulai Belanja
-          </Button>
-        </div>
-      </div>
+      <>
+        <Head>
+          <title>About Us - Universal Sneaker Store</title>
+        </Head>
+        {this.renderHero()}
+        {this.renderStory()}
+        {/* {this.renderWhatWeSell()} */}
+        {this.renderAchievements()}
+        {this.renderWhyChooseUs()}
+        {this.renderGallery()}
+        {this.renderBrands()}
+      </>
     );
   }
 }
 
-export default AboutPage;
+export default AboutUsPage;
