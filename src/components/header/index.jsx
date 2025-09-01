@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Typography } from "antd";
 
 const { Header } = Layout;
+const { Text } = Typography;
 
 class HeaderComponent extends React.Component {
   constructor(props) {
@@ -11,44 +14,18 @@ class HeaderComponent extends React.Component {
   }
 
   render() {
-    const items = [
-      {
-        key: "home",
-        label: (
-          <Link href="/" style={{ color: "white" }}>
-            Home
-          </Link>
-        ),
-      },
-      {
-        key: "about",
-        label: (
-          <Link href="/about-us" style={{ color: "white" }}>
-            About
-          </Link>
-        ),
-      },
-      // {
-      //   key: "products",
-      //   label: <Link href="/products">Products</Link>,
-      // },
-      // {
-      //   key: "contact",
-      //   label: <Link href="/contact">Contact</Link>,
-      // },
-    ];
-
     return (
-      <Header
-        theme="light"
+      <div
         style={{
           position: "fixed",
           top: 0,
-          zIndex: 1000,
+          left: 0,
           width: "100%",
+          zIndex: 1000,
+          backgroundColor: "transparent",
           display: "flex",
           justifyContent: "center",
-          backgroundColor: "transparent",
+          padding: "1rem 0",
         }}
       >
         <div
@@ -57,38 +34,37 @@ class HeaderComponent extends React.Component {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            color: "white",
           }}
         >
+          <div style={{ fontWeight: "bold" }}>Logo</div>
+
           <div
-            className="logo"
             style={{
-              color: "#fff",
-              fontWeight: "bold",
+              display: "flex",
+              gap: "2rem",
             }}
           >
-            Logo
+            <Link href="/" style={{ color: "white", textDecoration: "none" }}>
+              Home
+            </Link>
+            <Link
+              href="/about-us"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              About
+            </Link>
+            <Link
+              href="/faq"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              FAQ
+            </Link>
           </div>
-          <Menu
-            theme="light"
-            mode="horizontal"
-            items={items}
-            style={{
-              background: "transparent",
-              borderBottom: "none",
-              color: "white",
-            }}
-          />
-          <div
-            className="logo"
-            style={{
-              color: "#fff",
-              fontWeight: "bold",
-            }}
-          >
-            Logo
-          </div>
+
+          <div style={{ fontWeight: "bold" }}>Logo</div>
         </div>
-      </Header>
+      </div>
     );
   }
 }

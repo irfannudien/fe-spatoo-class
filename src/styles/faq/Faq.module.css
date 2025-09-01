@@ -1,0 +1,186 @@
+.faqSection {
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.faqTitleContainer {
+  background: url("/assets/bg/bg-cat2.jpg") center/cover no-repeat;
+  width: 100%;
+  display: flex;
+  min-height: 60vh;
+  justify-content: center;
+  position: relative;
+}
+
+.textContainer {
+  padding: 100px 25px 25px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-transform: uppercase;
+  gap: 50px;
+  position: relative;
+}
+
+.titleSatu {
+  font-size: 72px !important;
+  width: 60%;
+  margin: 0 !important;
+  color: white !important;
+}
+.titleDua {
+  width: 20%;
+  text-align: right;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* ======= SIDEBAR ============== */
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 90%;
+  padding: 40px 20px;
+}
+
+.sidebarleft {
+  width: 250px;
+  position: sticky;
+  top: 50px;
+  height: max-content;
+  background: #fff;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.titleSideBarTopic {
+  font-size: 18px;
+}
+
+.sidebarleft ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebarleft li {
+  padding: 12px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s;
+  color: black;
+}
+
+.sidebarleft li:hover {
+  background: #f97316;
+}
+
+.sidebarleft .active {
+  background: #f97316;
+  color: black;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 30px;
+}
+
+.divTitleTopic {
+  margin: 0 !important;
+  border-block-start: #dadada !important;
+}
+
+.dropdownList {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .faqTitleContainer {
+    min-height: 30vh;
+  }
+
+  .titleSatu {
+    font-size: 32px !important;
+  }
+
+  .titleDua {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .faqTitleContainer {
+    min-height: 40vh;
+  }
+
+  .textContainer {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 60px 20px;
+  }
+
+  .titleSatu {
+    font-size: 48px !important;
+    width: 100%;
+  }
+
+  .titleDua {
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sidebarleft {
+    display: none;
+  }
+
+  .dropdownList {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #dadada;
+    position: sticky;
+    top: 50px;
+    z-index: 20;
+  }
+
+  .sidebarDropdown {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #dadada;
+    z-index: 1000;
+    background: #f2f2f2;
+    color: black;
+  }
+}

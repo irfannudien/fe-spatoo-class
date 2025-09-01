@@ -14,6 +14,25 @@ import styles from "@/styles/about-us/AboutUs.module.css";
 
 const { Title, Paragraph, Text } = Typography;
 
+const faqData = [
+  {
+    title: "CARD 1",
+    bg: "/assets/bg/bg-cat2.jpg",
+  },
+  {
+    title: "CARD 2",
+    bg: "/assets/bg/bg-cat2.jpg",
+  },
+  {
+    title: "CARD 3",
+    bg: "/assets/bg/bg-cat2.jpg",
+  },
+  {
+    title: "CARD 4",
+    bg: "/assets/bg/bg-cat2.jpg",
+  },
+];
+
 class AboutUsPage extends React.Component {
   renderHero() {
     return (
@@ -399,10 +418,16 @@ class AboutUsPage extends React.Component {
           </div>
 
           <div className={styles.cardWrapper}>
-            <div className={styles.cardItem}>CARD 1</div>
-            <div className={styles.cardItem}>CARD 2</div>
-            <div className={styles.cardItem}>CARD 3</div>
-            <div className={styles.cardItem}>CARD 3</div>
+            {faqData.map((item, idx) => (
+              <div
+                key={idx}
+                className={styles.cardItem}
+                style={{
+                  transform: `rotate(${idx % 2 === 0 ? "-2deg" : "2deg"})`,
+                  background: `url(${item.bg}) no-repeat center / cover`,
+                }}
+              ></div>
+            ))}
           </div>
 
           <div className={styles.bottomText}>

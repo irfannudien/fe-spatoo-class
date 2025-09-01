@@ -6,7 +6,8 @@
   padding: 100px 20px;
   background: url("/assets/bg/bg-cat2.jpg") no-repeat bottom / cover;
   display: flex;
-  height: 60vh;
+  min-height: 400px;
+  max-height: 80vh;
   justify-content: center;
   align-items: center;
 }
@@ -291,7 +292,6 @@
   height: 300px;
   border-radius: 12px;
   text-align: center;
-  background: url("/assets/bg/bg-cat2.jpg") no-repeat center / cover;
 }
 
 .bottomText {

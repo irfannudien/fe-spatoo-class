@@ -12,11 +12,11 @@ class Homepage extends React.Component {
     return (
       <div>
         <h1>Homepage</h1>
-        <div style={{ width: "30%" }}>
+        {/* <div style={{ width: "30%" }}>
           <Input placeholder="Email" prefix={<UserOutlined />} />
           <Input.Password />
           <Button type="primary">Sign in</Button>
-        </div>
+        </div> */}
       </div>
     );
   }
