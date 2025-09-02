@@ -3,6 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { Layout, Menu, Typography } from "antd";
+import { withRouter } from "next/router";
+import { ShoppingCartOutlined, ShoppingOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -10,10 +12,31 @@ const { Text } = Typography;
 class HeaderComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isScrolled: false,
+    };
   }
 
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScrollBlur);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScrollBlur);
+  }
+
+  handleScrollBlur = () => {
+    this.setState({ isScrolled: window.scrollY > 50 });
+  };
+
   render() {
+    const { isScrolled } = this.state;
+    const { router } = this.props;
+
+    const isPolicyPage =
+      router.pathname === "/privacy-policy" ||
+      router.pathname === "/terms-of-services";
+
     return (
       <div
         style={{
@@ -22,10 +45,25 @@ class HeaderComponent extends React.Component {
           left: 0,
           width: "100%",
           zIndex: 1000,
-          backgroundColor: "transparent",
           display: "flex",
           justifyContent: "center",
-          padding: "1rem 0",
+          padding: "1.5rem 0",
+          transition: "all 0.3s ease",
+          backgroundColor: isPolicyPage
+            ? "black"
+            : isScrolled
+            ? "rgba(0,0,0,0.4)"
+            : "rgba(0,0,0,0)", // default
+          backdropFilter: isPolicyPage
+            ? "none"
+            : isScrolled
+            ? "blur(10px)"
+            : "none",
+          WebkitBackdropFilter: isPolicyPage
+            ? "none"
+            : isScrolled
+            ? "blur(10px)"
+            : "none",
         }}
       >
         <div
@@ -74,11 +112,11 @@ class HeaderComponent extends React.Component {
             </Link>
           </div>
 
-          <div style={{ fontWeight: "bold" }}>Logo</div>
+          <ShoppingCartOutlined style={{ fontSize: "20px" }} />
         </div>
       </div>
     );
   }
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);

@@ -57,10 +57,10 @@
 .sidebarleft {
   width: 250px;
   position: sticky;
-  top: 50px;
+  top: 70px;
   height: max-content;
   background: #fff;
-  padding: 10px;
+  padding: 20px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -70,6 +70,7 @@
 
 .titleSideBarTopic {
   font-size: 18px;
+  font-weight: bold;
 }
 
 .sidebarleft ul {
@@ -91,12 +92,12 @@
 
 .sidebarleft li:hover {
   background: #f97316;
+  color: white;
 }
 
 .sidebarleft .active {
   background: #f97316;
-  color: black;
-  font-weight: bold;
+  color: white;
 }
 
 .content {
@@ -159,13 +160,14 @@
     border-radius: 8px;
     border: 1px solid #dadada;
     position: sticky;
-    top: 50px;
+    top: 70px;
     z-index: 20;
+    background: #f2f2f2;
   }
 
   .sidebarDropdown {
     width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 8px;
     border: 1px solid #dadada;
     z-index: 1000;

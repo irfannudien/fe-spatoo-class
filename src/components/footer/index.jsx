@@ -1,3 +1,4 @@
+import NewsletterBlocks from "@/blocks/newsletterBlocks";
 import { Layout } from "antd";
 import React from "react";
 
@@ -10,16 +11,19 @@ class FooterComponent extends React.Component {
   }
   render() {
     return (
-      <Footer
-        style={{
-          textAlign: "center",
-          padding: "12px 8px",
-          background: "transparent",
-          color: "#666",
-        }}
-      >
-        <span>© 2025 - All rights reserved.</span>
-      </Footer>
+      <>
+        <NewsletterBlocks />
+        <Footer
+          style={{
+            textAlign: "center",
+            padding: "12px 8px",
+            background: "transparent",
+            color: "#666",
+          }}
+        >
+          <span>© 2025 - All rights reserved.</span>
+        </Footer>
+      </>
     );
   }
 }

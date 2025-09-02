@@ -1,8 +1,7 @@
-// termofservice.jsx
 import React from "react";
-import { Typography, Button } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import styles from "@/styles/term-of-services/Terms.module.css";
+import { Typography } from "antd";
+import styles from "@/styles/privacy-policy/Privacy.module.css";
+import Link from "next/link";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -16,73 +15,72 @@ class TermOfService extends React.Component {
       <section className={styles.pageLayout}>
         <div className={styles.content}>
           <div className={styles.card}>
-            <Title level={2} className={styles.title}>
+            <Title level={1} className={styles.title}>
               Terms of Service
             </Title>
 
             <Paragraph>
-              Selamat datang di <strong>TokoSepatu</strong>. Dengan mengakses
-              dan menggunakan layanan kami, Anda setuju untuk terikat dengan
-              syarat-syarat berikut.
+              Welcome to <strong>shoeshop</strong>. By accessing and using our
+              services, you agree to be bound by the following terms.
             </Paragraph>
 
             <section className={styles.section}>
-              <Title level={4}>1. Penggunaan Layanan</Title>
+              <Title level={4}>1. Use of Services</Title>
               <Paragraph>
-                Pengguna setuju memakai layanan sesuai hukum yang berlaku dan
-                tidak melakukan aktivitas yang merugikan pihak lain.
+                Users agree to use the services in compliance with applicable
+                laws and refrain from any activity that may harm others.
               </Paragraph>
             </section>
 
             <section className={styles.section}>
-              <Title level={4}>2. Akun & Akses</Title>
+              <Title level={4}>2. Accounts & Access</Title>
               <Paragraph>
-                Pengguna bertanggung jawab menjaga keamanan akun, termasuk kata
-                sandi. Kami berhak menangguhkan atau menghapus akun jika
-                ditemukan pelanggaran.
+                Users are responsible for maintaining the security of their
+                accounts, including passwords. We reserve the right to suspend
+                or terminate accounts in case of violations.
               </Paragraph>
             </section>
 
             <section className={styles.section}>
-              <Title level={4}>3. Pemesanan & Pembayaran</Title>
+              <Title level={4}>3. Orders & Payments</Title>
               <Paragraph>
-                Semua transaksi tunduk pada konfirmasi pembayaran. Kami dapat
-                membatalkan pesanan jika terdeteksi kecurangan atau stok kosong.
+                All transactions are subject to payment confirmation. We may
+                cancel orders if fraud is detected or items are out of stock.
               </Paragraph>
             </section>
 
             <section className={styles.section}>
-              <Title level={4}>4. Pengembalian & Refund</Title>
+              <Title level={4}>4. Returns & Refunds</Title>
               <Paragraph>
-                Ketentuan pengembalian dan refund mengikuti kebijakan yang
-                tertera di halaman Return Policy kami. Klaim refund harus
-                disertai bukti.
+                Return and refund policies follow the conditions stated on our
+                Return Policy page. Refund claims must be supported with valid
+                proof.
               </Paragraph>
             </section>
 
             <section className={styles.section}>
-              <Title level={4}>5. Batasan Tanggung Jawab</Title>
+              <Title level={4}>5. Limitation of Liability</Title>
               <Paragraph>
-                Kami tidak bertanggung jawab atas kerugian tidak langsung,
-                kehilangan data, atau gangguan usaha akibat penggunaan layanan.
+                We are not responsible for indirect damages, data loss, or
+                business interruptions resulting from the use of our services.
               </Paragraph>
             </section>
 
             <section className={styles.section}>
-              <Title level={4}>6. Perubahan Ketentuan</Title>
+              <Title level={4}>6. Changes to Terms</Title>
               <Paragraph>
-                Syarat ini dapat berubah. Perubahan akan diumumkan di situs dan
-                berlaku sejak tanggal publikasi. Tanggal terakhir update:
-                <Text strong> 1 September 2025</Text>.
+                These terms may be updated from time to time. Changes will be
+                announced on our website and will take effect from the date of
+                publication. Last updated on:
+                <Text strong> September 1, 2025</Text>.
               </Paragraph>
             </section>
 
             <Paragraph className={styles.contact}>
-              Untuk pertanyaan terkait syarat & ketentuan, hubungi:
-              <a href="mailto:legal@tokosepatu.example">
-                {" "}
-                legal@tokosepatu.example
-              </a>
+              For questions regarding these terms, please contact us at:{" "}
+              <Link href="mailto:legal@shoeshop.example">
+                legal@shoeshop.example
+              </Link>
             </Paragraph>
           </div>
         </div>

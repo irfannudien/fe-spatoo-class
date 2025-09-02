@@ -1,158 +1,10 @@
 import React, { Component } from "react";
-import { Collapse, Divider, Typography } from "antd";
+import { Collapse, Divider, Typography, Select } from "antd";
 import { RightOutlined } from "@ant-design/icons";
 import styles from "@/styles/faq/Faq.module.css";
 
 const { Title, Text } = Typography;
-
-const topics = [
-  {
-    key: "topic-0",
-    title: "General",
-    faqs: [
-      {
-        q: "Are all products guaranteed to be original?",
-        a: "Yes, all our products are 100% original from official brands.",
-      },
-      {
-        q: "How do I create an account?",
-        a: "Click the Sign Up button at the top right, fill in your details, and verify your email.",
-      },
-      {
-        q: "Is there a mobile app?",
-        a: "Yes, it is available on both the Play Store and App Store.",
-      },
-      {
-        q: "Is there a loyalty or points program?",
-        a: "Yes, each purchase earns points that can be redeemed for discounts.",
-      },
-      {
-        q: "How can I contact customer service?",
-        a: "You can contact us via live chat or email at support@mail.com.",
-      },
-    ],
-  },
-  {
-    key: "topic-1",
-    title: "Shipping",
-    faqs: [
-      {
-        q: "How long does shipping take?",
-        a: "1-3 days for Jabodetabek, 3-7 days for other cities.",
-      },
-      {
-        q: "Is there free shipping?",
-        a: "Free shipping for purchases over IDR 500,000.",
-      },
-      {
-        q: "Do you ship nationwide?",
-        a: "Yes, we deliver throughout Indonesia.",
-      },
-      {
-        q: "Can I choose my own courier?",
-        a: "Yes, you can select JNE, Sicepat, Anteraja, or J&T at checkout.",
-      },
-      {
-        q: "Can I pick up in-store?",
-        a: "Currently, in-store pickup is not available.",
-      },
-      {
-        q: "How can I track my order?",
-        a: "You can track your order on the 'Track Order' page using the tracking number.",
-      },
-    ],
-  },
-  {
-    key: "topic-2",
-    title: "Payment",
-    faqs: [
-      {
-        q: "What payment methods are available?",
-        a: "Bank transfer, e-wallet, credit card, and COD.",
-      },
-      {
-        q: "Is COD (Cash on Delivery) available?",
-        a: "Yes, COD is available for certain areas.",
-      },
-      {
-        q: "Is my payment secure?",
-        a: "Yes, all payments are processed through a secure and encrypted system.",
-      },
-      {
-        q: "Can I pay in installments?",
-        a: "Yes, installments are available with certain credit cards.",
-      },
-      {
-        q: "Do you accept e-wallets (OVO, GoPay)?",
-        a: "Yes, we accept payments via OVO, GoPay, and Dana.",
-      },
-      {
-        q: "What if my payment fails?",
-        a: "Please retry the transaction or contact our customer service.",
-      },
-    ],
-  },
-  {
-    key: "topic-3",
-    title: "Returns & Refunds",
-    faqs: [
-      {
-        q: "Can I exchange my shoe size?",
-        a: "Yes, as long as the product is unused and in its original condition.",
-      },
-      {
-        q: "How long do I have to request a return?",
-        a: "Up to 7 days after receiving the item.",
-      },
-      {
-        q: "How do I request a return?",
-        a: "Log in to your account, select the order, and click Request Return.",
-      },
-      {
-        q: "Does the buyer pay for return shipping?",
-        a: "Yes, except in cases of our error.",
-      },
-      {
-        q: "How long does a refund take?",
-        a: "Refunds are processed within 3-5 business days after receiving the item.",
-      },
-      {
-        q: "Can I exchange for a different product?",
-        a: "Yes, as long as the stock is available and return policies are met.",
-      },
-    ],
-  },
-  {
-    key: "topic-4",
-    title: "Products & Stock",
-    faqs: [
-      {
-        q: "Is the stock on the website always updated?",
-        a: "Yes, our stock is updated in real-time.",
-      },
-      {
-        q: "Are there limited edition products?",
-        a: "Yes, we frequently release exclusive products with limited stock.",
-      },
-      {
-        q: "How do I know the right size?",
-        a: "Use the size guide available on the product page.",
-      },
-      {
-        q: "Is there a warranty for shoes?",
-        a: "Yes, the official brand warranty applies to every product.",
-      },
-      {
-        q: "Can products be pre-ordered?",
-        a: "Yes, certain products can be pre-ordered.",
-      },
-      {
-        q: "Are there discounts for bulk purchases?",
-        a: "Yes, wholesale discounts are available for bulk purchases.",
-      },
-    ],
-  },
-];
+const { Option } = Select;
 
 export default class FAQ extends Component {
   constructor(props) {
@@ -162,13 +14,11 @@ export default class FAQ extends Component {
     };
   }
 
-  handleScroll = (id) => {
-    this.setState({ activeTopic: id });
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -80; // jika ada navbar fixed
-      const y =
-        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  handleScroll = (key) => {
+    this.setState({ activeTopic: key });
+    const el = document.getElementById(key);
+    if (el) {
+      const y = el.offsetTop - 70;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -193,67 +43,403 @@ export default class FAQ extends Component {
         <div className={styles.wrapper}>
           <div className={styles.sidebarleft}>
             <Text className={styles.titleSideBarTopic}>Page topics</Text>
-
             <ul className={styles.sidebarList}>
-              {topics.map((topic) => (
-                <li
-                  key={topic.key}
-                  className={activeTopic === topic.key ? styles.active : ""}
-                  onClick={() => this.handleScroll(topic.key)}
-                >
-                  {topic.title}
-                </li>
-              ))}
+              <li
+                className={activeTopic === "topic-0" ? styles.active : ""}
+                onClick={() => this.handleScroll("topic-0")}
+              >
+                General
+              </li>
+              <li
+                className={activeTopic === "topic-1" ? styles.active : ""}
+                onClick={() => this.handleScroll("topic-1")}
+              >
+                Shipping
+              </li>
+              <li
+                className={activeTopic === "topic-2" ? styles.active : ""}
+                onClick={() => this.handleScroll("topic-2")}
+              >
+                Payment
+              </li>
+              <li
+                className={activeTopic === "topic-3" ? styles.active : ""}
+                onClick={() => this.handleScroll("topic-3")}
+              >
+                Returns & Refunds
+              </li>
+              <li
+                className={activeTopic === "topic-4" ? styles.active : ""}
+                onClick={() => this.handleScroll("topic-4")}
+              >
+                Products & Stock
+              </li>
             </ul>
           </div>
 
           <div className={styles.dropdownList}>
-            <select
+            <Select
               value={activeTopic}
-              onChange={(e) => this.handleScroll(e.target.value)}
+              onChange={(value) => this.handleScroll(value)}
               className={styles.sidebarDropdown}
             >
-              {topics.map((topic) => (
-                <option key={topic.key} value={topic.key}>
-                  {topic.title}
-                </option>
-              ))}
-            </select>
+              <Option value="topic-0">General</Option>
+              <Option value="topic-1">Shipping</Option>
+              <Option value="topic-2">Payment</Option>
+              <Option value="topic-3">Returns & Refunds</Option>
+              <Option value="topic-4">Products & Stock</Option>
+            </Select>
           </div>
 
           <div className={styles.content}>
-            {topics.map((topic) => (
-              <div
-                id={topic.key}
-                key={topic.key}
-                style={{
-                  border: "1px solid #dadada",
-                  borderRadius: "20px",
-                  padding: "20px",
-                }}
-              >
-                <Divider orientation="left" className={styles.divTitleTopic}>
-                  <Title level={3} className={styles.titleTopic}>
-                    {topic.title}
-                  </Title>
-                </Divider>
-                {/* <Title level={3} className={styles.titleTopic}>
-                  {topic.title}
-                </Title> */}
-                <Collapse
-                  accordion
-                  bordered={false}
-                  expandIcon={({ isActive }) => (
-                    <RightOutlined rotate={isActive ? 90 : 0} />
-                  )}
-                  items={topic.faqs.map((faq, index) => ({
-                    key: `${topic.key}-${index}`,
-                    label: faq.q,
-                    children: <p>{faq.a}</p>,
-                  }))}
-                />
-              </div>
-            ))}
+            <div
+              id="topic-0"
+              style={{
+                border: "1px solid #dadada",
+                borderRadius: 20,
+                padding: 20,
+              }}
+            >
+              <Divider orientation="left" className={styles.divTitleTopic}>
+                <Title level={3} className={styles.titleTopic}>
+                  General
+                </Title>
+              </Divider>
+              <Collapse
+                accordion
+                bordered={false}
+                items={[
+                  {
+                    key: "topic-0-0",
+                    label: "Are all products guaranteed to be original?",
+                    children: (
+                      <p>
+                        Yes, all our products are 100% original from official
+                        brands.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-0-1",
+                    label: "How do I create an account?",
+                    children: (
+                      <p>
+                        Click the Sign Up button at the top right, fill in your
+                        details, and verify your email.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-0-2",
+                    label: "Is there a mobile app?",
+                    children: (
+                      <p>
+                        Yes, it is available on both the Play Store and App
+                        Store.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-0-3",
+                    label: "Is there a loyalty or points program?",
+                    children: (
+                      <p>
+                        Yes, each purchase earns points that can be redeemed for
+                        discounts.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-0-4",
+                    label: "How can I contact customer service?",
+                    children: (
+                      <p>
+                        You can contact us via live chat or email at
+                        support@mail.com.
+                      </p>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+
+            <div
+              id="topic-1"
+              style={{
+                border: "1px solid #dadada",
+                borderRadius: 20,
+                padding: 20,
+              }}
+            >
+              <Divider orientation="left" className={styles.divTitleTopic}>
+                <Title level={3} className={styles.titleTopic}>
+                  Shipping
+                </Title>
+              </Divider>
+              <Collapse
+                accordion
+                bordered={false}
+                items={[
+                  {
+                    key: "topic-1-0",
+                    label: "How long does shipping take?",
+                    children: (
+                      <p>
+                        1-3 days for Jabodetabek, 3-7 days for other cities.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-1-1",
+                    label: "Is there free shipping?",
+                    children: (
+                      <p>Free shipping for purchases over IDR 500,000.</p>
+                    ),
+                  },
+                  {
+                    key: "topic-1-2",
+                    label: "Do you ship nationwide?",
+                    children: <p>Yes, we deliver throughout Indonesia.</p>,
+                  },
+                  {
+                    key: "topic-1-3",
+                    label: "Can I choose my own courier?",
+                    children: (
+                      <p>
+                        Yes, you can select JNE, Sicepat, Anteraja, or J&T at
+                        checkout.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-1-4",
+                    label: "Can I pick up in-store?",
+                    children: (
+                      <p>Currently, in-store pickup is not available.</p>
+                    ),
+                  },
+                  {
+                    key: "topic-1-5",
+                    label: "How can I track my order?",
+                    children: (
+                      <p>
+                        You can track your order on the 'Track Order' page using
+                        the tracking number.
+                      </p>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+
+            <div
+              id="topic-2"
+              style={{
+                border: "1px solid #dadada",
+                borderRadius: 20,
+                padding: 20,
+              }}
+            >
+              <Divider orientation="left" className={styles.divTitleTopic}>
+                <Title level={3} className={styles.titleTopic}>
+                  Payment
+                </Title>
+              </Divider>
+              <Collapse
+                accordion
+                bordered={false}
+                items={[
+                  {
+                    key: "topic-2-0",
+                    label: "What payment methods are available?",
+                    children: (
+                      <p>Bank transfer, e-wallet, credit card, and COD.</p>
+                    ),
+                  },
+                  {
+                    key: "topic-2-1",
+                    label: "Is COD (Cash on Delivery) available?",
+                    children: <p>Yes, COD is available for certain areas.</p>,
+                  },
+                  {
+                    key: "topic-2-2",
+                    label: "Is my payment secure?",
+                    children: (
+                      <p>
+                        Yes, all payments are processed through a secure and
+                        encrypted system.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-2-3",
+                    label: "Can I pay in installments?",
+                    children: (
+                      <p>
+                        Yes, installments are available with certain credit
+                        cards.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-2-4",
+                    label: "Do you accept e-wallets (OVO, GoPay)?",
+                    children: (
+                      <p>Yes, we accept payments via OVO, GoPay, and Dana.</p>
+                    ),
+                  },
+                  {
+                    key: "topic-2-5",
+                    label: "What if my payment fails?",
+                    children: (
+                      <p>
+                        Please retry the transaction or contact our customer
+                        service.
+                      </p>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+
+            <div
+              id="topic-3"
+              style={{
+                border: "1px solid #dadada",
+                borderRadius: 20,
+                padding: 20,
+              }}
+            >
+              <Divider orientation="left" className={styles.divTitleTopic}>
+                <Title level={3} className={styles.titleTopic}>
+                  Returns & Refunds
+                </Title>
+              </Divider>
+              <Collapse
+                accordion
+                bordered={false}
+                items={[
+                  {
+                    key: "topic-3-0",
+                    label: "Can I exchange my shoe size?",
+                    children: (
+                      <p>
+                        Yes, as long as the product is unused and in its
+                        original condition.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-3-1",
+                    label: "How long do I have to request a return?",
+                    children: <p>Up to 7 days after receiving the item.</p>,
+                  },
+                  {
+                    key: "topic-3-2",
+                    label: "How do I request a return?",
+                    children: (
+                      <p>
+                        Log in to your account, select the order, and click
+                        Request Return.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-3-3",
+                    label: "Does the buyer pay for return shipping?",
+                    children: <p>Yes, except in cases of our error.</p>,
+                  },
+                  {
+                    key: "topic-3-4",
+                    label: "How long does a refund take?",
+                    children: (
+                      <p>
+                        Refunds are processed within 3-5 business days after
+                        receiving the item.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-3-5",
+                    label: "Can I exchange for a different product?",
+                    children: (
+                      <p>
+                        Yes, as long as the stock is available and return
+                        policies are met.
+                      </p>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+
+            <div
+              id="topic-4"
+              style={{
+                border: "1px solid #dadada",
+                borderRadius: 20,
+                padding: 20,
+              }}
+            >
+              <Divider orientation="left" className={styles.divTitleTopic}>
+                <Title level={3} className={styles.titleTopic}>
+                  Products & Stock
+                </Title>
+              </Divider>
+              <Collapse
+                accordion
+                bordered={false}
+                items={[
+                  {
+                    key: "topic-4-0",
+                    label: "Is the stock on the website always updated?",
+                    children: <p>Yes, our stock is updated in real-time.</p>,
+                  },
+                  {
+                    key: "topic-4-1",
+                    label: "Are there limited edition products?",
+                    children: (
+                      <p>
+                        Yes, we frequently release exclusive products with
+                        limited stock.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-4-2",
+                    label: "How do I know the right size?",
+                    children: (
+                      <p>Use the size guide available on the product page.</p>
+                    ),
+                  },
+                  {
+                    key: "topic-4-3",
+                    label: "Is there a warranty for shoes?",
+                    children: (
+                      <p>
+                        Yes, the official brand warranty applies to every
+                        product.
+                      </p>
+                    ),
+                  },
+                  {
+                    key: "topic-4-4",
+                    label: "Can products be pre-ordered?",
+                    children: <p>Yes, certain products can be pre-ordered.</p>,
+                  },
+                  {
+                    key: "topic-4-5",
+                    label: "Are there discounts for bulk purchases?",
+                    children: (
+                      <p>
+                        Yes, wholesale discounts are available for bulk
+                        purchases.
+                      </p>
+                    ),
+                  },
+                ]}
+              />
+            </div>
           </div>
         </div>
       </section>
