@@ -60,6 +60,18 @@ class HeaderComponent extends React.Component {
             >
               FAQ
             </Link>
+            <Link
+              href="/privacy-policy"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms-of-services"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Terms of Services
+            </Link>
           </div>
 
           <div style={{ fontWeight: "bold" }}>Logo</div>

@@ -1,6 +1,15 @@
 import React from "react";
 import Head from "next/head";
-import { Row, Col, Card, Typography, Space, Divider, Image } from "antd";
+import {
+  Row,
+  Col,
+  Card,
+  Typography,
+  Space,
+  Divider,
+  Image,
+  Carousel,
+} from "antd";
 import {
   TrophyOutlined,
   CheckCircleOutlined,
@@ -56,14 +65,22 @@ class AboutUsPage extends React.Component {
                 className={`${styles.storyImgBox} ${styles.imgContainerLeft}`}
               >
                 <div className={styles.imgBoxLeft}>
-                  <img src="/assets/bg/bg-cat2.jpg" alt="Story 1" />
+                  <img
+                    className={styles.imgStory}
+                    src="/assets/bg/bg-cat2.jpg"
+                    alt="Story 1"
+                  />
                 </div>
               </div>
               <div
                 className={`${styles.storyImgBox} ${styles.imgContainerRight}`}
               >
                 <div className={styles.imgBoxRight}>
-                  <img src="/assets/bg/bg-cat2.jpg" alt="Story 2" />
+                  <img
+                    className={styles.imgStory}
+                    src="/assets/bg/bg-cat2.jpg"
+                    alt="Story 2"
+                  />
                 </div>
               </div>
             </div>
@@ -87,52 +104,6 @@ class AboutUsPage extends React.Component {
             </div>
           </div>
         </div>
-      </section>
-    );
-  }
-
-  renderWhatWeSell() {
-    return (
-      <section className={styles.sectionAlt}>
-        <Title level={2}>What We Sell</Title>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={8}>
-            <Card hoverable>
-              <ShoppingOutlined
-                style={{ fontSize: 36, color: "#1677ff", marginBottom: 12 }}
-              />
-              <Title level={4}>Sneakers</Title>
-              <Paragraph>
-                Koleksi sneakers dari berbagai brand populer, cocok untuk gaya
-                casual maupun streetwear.
-              </Paragraph>
-            </Card>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card hoverable>
-              <FireOutlined
-                style={{ fontSize: 36, color: "#1677ff", marginBottom: 12 }}
-              />
-              <Title level={4}>Running Shoes</Title>
-              <Paragraph>
-                Sepatu lari dengan teknologi terbaru untuk menunjang performa
-                olahraga Anda.
-              </Paragraph>
-            </Card>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card hoverable>
-              <TrophyOutlined
-                style={{ fontSize: 36, color: "#1677ff", marginBottom: 12 }}
-              />
-              <Title level={4}>Limited Editions</Title>
-              <Paragraph>
-                Rilisan terbatas dan kolaborasi eksklusif untuk para kolektor
-                sepatu sejati.
-              </Paragraph>
-            </Card>
-          </Col>
-        </Row>
       </section>
     );
   }
@@ -366,39 +337,6 @@ class AboutUsPage extends React.Component {
     );
   }
 
-  renderBrands() {
-    return (
-      <section className={styles.brandSection}>
-        <div className={styles.brandFlex}>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/nike.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/onitsuka.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/nb.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/cons.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/jordan.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/vans.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/puma.png" />
-          </div>
-          <div className={styles.brandItem}>
-            <Image width={100} src="/assets/brand/adidas.png" />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   renderGallery() {
     return (
       <section className={styles.gallerySection}>
@@ -430,10 +368,61 @@ class AboutUsPage extends React.Component {
             ))}
           </div>
 
+          <div className={styles.carouselWrapper}>
+            <Carousel arrows infinite={true}>
+              {faqData.map((item, idx) => (
+                <div key={idx} className={styles.carouselItem}>
+                  <div
+                    className={styles.cardItem}
+                    style={{
+                      background: `url(${item.bg}) no-repeat center / cover`,
+                    }}
+                  />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+
           <div className={styles.bottomText}>
             <Text className={styles.ourText}>OUR</Text>
             <span className={styles.lineBottomGallery}></span>
             <Text className={styles.galleryText}>GALLERY</Text>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  renderBrands() {
+    return (
+      <section className={styles.brandSection}>
+        <div className={styles.brandFlex}>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/nike.png" className={styles.brandImg} />
+          </div>
+          <div className={styles.brandItem}>
+            <Image
+              src="/assets/brand/onitsuka.png"
+              className={styles.brandImg}
+            />
+          </div>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/nb.png" className={styles.brandImg} />
+          </div>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/cons.png" className={styles.brandImg} />
+          </div>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/jordan.png" className={styles.brandImg} />
+          </div>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/vans.png" className={styles.brandImg} />
+          </div>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/puma.png" className={styles.brandImg} />
+          </div>
+          <div className={styles.brandItem}>
+            <Image src="/assets/brand/adidas.png" className={styles.brandImg} />
           </div>
         </div>
       </section>

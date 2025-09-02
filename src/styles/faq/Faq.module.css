@@ -116,21 +116,10 @@
   display: none;
 }
 
-@media (max-width: 640px) {
-  .faqTitleContainer {
-    min-height: 30vh;
-  }
+/* ==================== RESPONSIVE ==================== */
 
-  .titleSatu {
-    font-size: 32px !important;
-  }
-
-  .titleDua {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 1024px) {
+/* ======= TABLET ======= */
+@media (max-width: 1079px) {
   .faqTitleContainer {
     min-height: 40vh;
   }
@@ -182,5 +171,20 @@
     z-index: 1000;
     background: #f2f2f2;
     color: black;
+  }
+}
+
+/* ======= MOBILE ======= */
+@media (max-width: 767px) {
+  .faqTitleContainer {
+    min-height: 30vh;
+  }
+
+  .titleSatu {
+    font-size: 32px !important;
+  }
+
+  .titleDua {
+    font-size: 16px;
   }
 }

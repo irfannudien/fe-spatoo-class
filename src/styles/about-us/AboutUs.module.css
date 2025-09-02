@@ -1,8 +1,6 @@
 /* ======= HERO SECTION ======= */
 .heroSection {
-  /* padding: 40px; */
   position: relative;
-  /* background-color: #fafafa; */
   padding: 100px 20px;
   background: url("/assets/bg/bg-cat2.jpg") no-repeat bottom / cover;
   display: flex;
@@ -71,8 +69,7 @@
   height: 100%;
 }
 
-.imgContainerLeft img,
-.imgContainerRight img {
+.imgStory {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -81,8 +78,7 @@
 .textBox {
   width: 35%;
   color: black;
-
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 8px;
 }
 
@@ -97,12 +93,11 @@
 .titleLine {
   height: 3px;
   width: 3rem;
-  background: linear-gradient(90deg, #f97316, #ef4444); /* orange ke merah */
+  background: #f97316;
   border-radius: 2px;
 }
 
 .smallTitle {
-  display: block;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -120,7 +115,6 @@
   font-size: 16px;
   line-height: 1.7;
   color: #555;
-  display: block; /* biar kayak paragraf */
   margin-top: 8px;
 }
 
@@ -136,9 +130,7 @@
 .achievementContent {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
   gap: 50px;
-  margin-top: 24px;
   justify-content: center;
 }
 
@@ -286,6 +278,10 @@
   margin-bottom: 40px;
 }
 
+.carouselWrapper {
+  display: none;
+}
+
 .cardItem {
   background: rgba(255, 255, 255, 0.1);
   padding: 40px;
@@ -298,7 +294,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px; /* jarak antara teks & garis */
+  gap: 50px;
   margin-top: 40px;
 }
 
@@ -311,7 +307,7 @@
 }
 
 .lineBottomGallery {
-  flex: 1; /* otomatis isi ruang kosong */
+  flex: 1;
   height: 2px;
   background-color: white;
 }
@@ -320,12 +316,6 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
-}
-
-@media (max-width: 768px) {
-  .whyChooseCardContainer {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ======= BRAND SECTION ======= */
@@ -337,12 +327,176 @@
 
 .brandFlex {
   display: flex;
-  justify-content: center;
+  padding: 0 20px;
   gap: 60px;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.brandItem {
-  display: flex;
-  align-items: center;
+.brandImg {
+  max-width: 150px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+/* ======= TABLET ======= */
+@media (max-width: 1079px) {
+  /* === STORY === */
+  .storyContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .imageFlexRow {
+    width: 100%;
+    height: auto;
+  }
+
+  .textBox {
+    width: 100%;
+    text-align: justify;
+  }
+
+  /* === ACHIEVEMENTS === */
+  .achievementContent {
+    gap: 20px;
+  }
+
+  .achievementCard {
+    min-width: 160px;
+  }
+
+  /* === GALLERY === */
+  .textGallery {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .titleGallery {
+    order: -1;
+  }
+
+  .descTextGallery {
+    max-width: 100%;
+    width: 100%;
+    order: 1;
+    font-size: 24px;
+    text-align: justify;
+  }
+
+  .cardWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ourText,
+  .galleryText {
+    font-size: 42px;
+  }
+
+  /* === BRAND === */
+  .brandFlex {
+    overflow: hidden;
+    gap: 25px;
+  }
+
+  .brandImg {
+    max-width: 70px;
+  }
+}
+
+/* ======= MOBILE ======= */
+@media (max-width: 767px) {
+  .heroSection {
+    padding: 80px 15px;
+    min-height: 100px;
+  }
+
+  /* === STORY === */
+  .storySection {
+    padding: 50px 20px;
+  }
+  .storyContainer {
+    max-width: 90%;
+  }
+
+  .bigTitle {
+    text-align: left;
+  }
+
+  /* .imageFlexRow {
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
+  } */
+
+  /* .imgContainerLeft,
+  .imgContainerRight {
+    width: 100%;
+    padding: 0;
+  } */
+
+  /* === ACHIEVEMENTS === */
+  .achievementCard {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .cardTitle {
+    font-size: 12px;
+  }
+
+  .cardValue {
+    font-size: 18px;
+  }
+
+  .icon {
+    font-size: 28px;
+  }
+
+  /* === WHYCHOOSE === */
+  .whyChooseContainer {
+    max-width: 100%;
+  }
+
+  .whyChooseCardContainer {
+    grid-template-columns: 1fr;
+  }
+
+  /* === GALLERY === */
+  .textGallery {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .descTextGallery {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .cardWrapper {
+    display: none;
+  }
+
+  .carouselWrapper {
+    display: block;
+  }
+
+  .ourText,
+  .galleryText {
+    font-size: 32px;
+  }
+
+  /* === BRAND === */
+  .brandFlex {
+    overflow: hidden;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .brandImg {
+    width: 70% !important;
+  }
 }
