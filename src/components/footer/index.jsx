@@ -12,7 +12,7 @@ class FooterComponent extends React.Component {
   render() {
     return (
       <>
-        <NewsletterBlocks />
+        {/* <NewsletterBlocks /> */}
         <Footer
           style={{
             textAlign: "center",

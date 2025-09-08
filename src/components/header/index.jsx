@@ -35,7 +35,8 @@ class HeaderComponent extends React.Component {
 
     const isPolicyPage =
       router.pathname === "/privacy-policy" ||
-      router.pathname === "/terms-of-services";
+      router.pathname === "/terms-of-services" ||
+      router.pathname === "/";
 
     return (
       <div
@@ -50,10 +51,10 @@ class HeaderComponent extends React.Component {
           padding: "1.5rem 0",
           transition: "all 0.3s ease",
           backgroundColor: isPolicyPage
-            ? "black"
+            ? "rgba(0,0,0,.5)"
             : isScrolled
             ? "rgba(0,0,0,0.4)"
-            : "rgba(0,0,0,0)", // default
+            : "rgba(0,0,0,0)",
           backdropFilter: isPolicyPage
             ? "none"
             : isScrolled
