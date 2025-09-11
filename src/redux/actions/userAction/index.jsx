@@ -15,6 +15,21 @@ export const getUserById = (userId) => {
   };
 };
 
+export const loginUser = (body) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`${API_URL}/login`, body);
+
+      console.log("Response Login Data", res.data);
+
+      return { success: true, data: res.data.data };
+    } catch (err) {
+      const errMessage = err?.response?.data || "Login error";
+      return { success: false, message: errMessage };
+    }
+  };
+};
+
 export const editUserData = (id, body) => {
   return async (dispatch) => {
     try {

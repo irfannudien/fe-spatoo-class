@@ -182,7 +182,6 @@
 
 .whyChooseCardContainer {
   display: grid;
-
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   gap: 24px;
@@ -340,7 +339,7 @@
 /* ==================== RESPONSIVE ==================== */
 
 /* ======= TABLET ======= */
-@media (max-width: 1079px) {
+@media (max-width: 1080px) {
   /* === STORY === */
   .storyContent {
     flex-direction: column;
@@ -407,7 +406,7 @@
 }
 
 /* ======= MOBILE ======= */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .heroSection {
     padding: 80px 15px;
     min-height: 100px;
@@ -456,12 +455,17 @@
   }
 
   /* === WHYCHOOSE === */
+  .whyChooseSection {
+    padding: 50px 20px;
+  }
+
   .whyChooseContainer {
     max-width: 100%;
   }
 
   .whyChooseCardContainer {
     grid-template-columns: 1fr;
+    padding: 0;
   }
 
   /* === GALLERY === */
@@ -482,6 +486,10 @@
 
   .carouselWrapper {
     display: block;
+  }
+
+  .bottomText {
+    gap: 20px;
   }
 
   .ourText,

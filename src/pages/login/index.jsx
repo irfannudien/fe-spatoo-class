@@ -4,18 +4,53 @@ import Link from "next/link";
 import styles from "../../styles/login/Login.module.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
+import { connect } from "react-redux";
+import { loginUser } from "@/redux/actions/userAction";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: "",
+      password: "",
+    };
   }
 
-  onFinish = (values) => {
-    console.log("Success:", values);
+  handleLogin = async () => {
+    const { email, password } = this.state;
+
+    if (!password && !email) {
+      alert("Please fill full field");
+      return;
+    }
+
+    if (!email) {
+      alert("Please input your email");
+      return;
+    }
+    if (!password) {
+      alert("Please input your password");
+      return;
+    }
+
+    const body = { email, password };
+
+    const result = await this.props.loginUser(body);
+    console.log("RESULT LOGIN FORM", result);
+    if (result.success) {
+      this.setState({ email: "", password: "" });
+      window.location.replace("/");
+    } else {
+      alert(result.message.message);
+    }
   };
-  onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
+  // onFinish = (values) => {
+  //   console.log("Success:", values);
+  // };
+  // onFinishFailed = (errorInfo) => {
+  //   console.log("Failed:", errorInfo);
+  // };
 
   render() {
     return (
@@ -25,27 +60,33 @@ class Login extends React.Component {
             name="login"
             initialValues={{ remember: true }}
             style={{ maxWidth: 360 }}
-            onFinish={this.onFinish}
+            // onFinish={this.onFinish}
           >
             <Form.Item
-              name="username"
-              rules={[
-                { required: true, message: "Please input your username!" },
-              ]}
+              name="email"
+              // rules={[{ required: true, message: "Please input your email" }]}
             >
-              <Input prefix={<UserOutlined />} placeholder="Username" />
+              <Input
+                prefix={<UserOutlined />}
+                type="email"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={(e) => this.setState({ email: e.target.value })}
+              />
             </Form.Item>
 
             <Form.Item
               name="password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
+              // rules={[
+              //   { required: true, message: "Please input your password!" },
+              // ]}
             >
-              <Input
+              <Input.Password
                 prefix={<LockOutlined />}
                 type="password"
                 placeholder="Password"
+                value={this.state.password}
+                onChange={(a) => this.setState({ password: a.target.value })}
               />
             </Form.Item>
 
@@ -60,7 +101,12 @@ class Login extends React.Component {
               </Flex>
             </Form.Item>
             <Form.Item>
-              <Button block type="primary" htmlType="submit">
+              <Button
+                block
+                type="primary"
+                htmlType="submit"
+                onClick={this.handleLogin}
+              >
                 Log in
               </Button>
               or{" "}
@@ -75,4 +121,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default connect(null, { loginUser })(Login);

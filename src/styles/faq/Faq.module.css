@@ -120,7 +120,7 @@
 /* ==================== RESPONSIVE ==================== */
 
 /* ======= TABLET ======= */
-@media (max-width: 1079px) {
+@media (max-width: 1080px) {
   .faqTitleContainer {
     min-height: 40vh;
   }
@@ -177,7 +177,7 @@
 }
 
 /* ======= MOBILE ======= */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .faqTitleContainer {
     min-height: 30vh;
   }

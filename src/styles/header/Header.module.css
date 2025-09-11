@@ -1,0 +1,115 @@
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.headerContent {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  color: white;
+  text-decoration: none;
+}
+
+.mobileMenu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.hamburgerButton {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.hamburgerBarTop,
+.hamburgerBarCenter,
+.hamburgerBarBottom {
+  height: 1px;
+  background-color: white;
+}
+
+.hamburgerBarTop,
+.hamburgerBarCenter {
+  width: 24px;
+}
+
+.hamburgerBarBottom {
+  width: 18px;
+  transform-origin: left;
+  align-self: flex-end;
+}
+
+.hamburgerDrawer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.drawerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+/* ======= TABLET ======= */
+@media (max-width: 1080px) {
+  .headerContent {
+    width: 90%;
+  }
+  .navLinks {
+    gap: 1rem;
+  }
+}
+
+/* ======= MOBILE ======= */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+
+  .hamburgerButton {
+    display: flex;
+  }
+}
