@@ -19,10 +19,13 @@ export const loginUser = (body) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${API_URL}/login`, body);
+      const result = res.data.data;
 
       console.log("Response Login Data", res.data);
 
-      return { success: true, data: res.data.data };
+      localStorage.setItem("token", res.data.token);
+
+      return { success: true, result };
     } catch (err) {
       const errMessage = err?.response?.data || "Login error";
       return { success: false, message: errMessage };

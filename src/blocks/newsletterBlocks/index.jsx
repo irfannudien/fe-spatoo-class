@@ -12,9 +12,9 @@ class NewsletterBlocks extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getProductData();
-  }
+  // componentDidMount() {
+  //   this.props.getProductData();
+  // }
 
   handleSubmitSubscriber = async () => {
     const { email } = this.state;

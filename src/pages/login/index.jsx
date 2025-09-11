@@ -39,7 +39,7 @@ class Login extends React.Component {
     console.log("RESULT LOGIN FORM", result);
     if (result.success) {
       this.setState({ email: "", password: "" });
-      window.location.replace("/");
+      // window.location.replace("/");
     } else {
       alert(result.message.message);
     }
