@@ -30,7 +30,8 @@ export const loginUser = (body) => {
 
       return { success: true, result };
     } catch (err) {
-      const errMessage = err?.response?.data || "Login error";
+      const errMessage =
+        err?.response?.data || "Something went wrong. Please try again";
       return { success: false, message: errMessage };
     }
   };

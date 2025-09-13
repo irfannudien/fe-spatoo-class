@@ -1,14 +1,14 @@
 import React from "react";
-import { Form, Input, Button, Card, Checkbox, Flex } from "antd";
+import { Form, Input, Button, Checkbox, Flex, Card } from "antd";
 import Link from "next/link";
-import styles from "../../styles/login/Login.module.css";
+import styles from "@/styles/login/Login.module.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 import { connect } from "react-redux";
 import { loginUser } from "@/redux/actions/userAction";
 import { withRouter } from "next/router";
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,29 +21,24 @@ class Login extends React.Component {
   handleLogin = async () => {
     const { email, password, rememberMe } = this.state;
 
-    if (!password || !email) {
-      alert("Please fill full field");
-      return;
-    }
-
     const body = { email, password, rememberMe };
     const result = await this.props.loginUser(body);
     console.log("RESULT LOGIN FORM", result);
 
     if (result.success) {
       this.setState({ email: "", password: "" });
+      this.props.notificationApi.success({
+        message: "Login success",
+        description: "Welcome back",
+      });
       this.props.router.push("/");
     } else {
-      alert(result.message.message);
+      this.props.notificationApi.error({
+        message: "Login failed",
+        description: result.message.message,
+      });
     }
   };
-
-  // onFinish = (values) => {
-  //   console.log("Success:", values);
-  // };
-  // onFinishFailed = (errorInfo) => {
-  //   console.log("Failed:", errorInfo);
-  // };
 
   render() {
     return (
@@ -53,11 +48,14 @@ class Login extends React.Component {
             name="login"
             initialValues={{ remember: true }}
             style={{ maxWidth: 360 }}
-            // onFinish={this.onFinish}
+            onFinish={this.handleLogin}
           >
             <Form.Item
               name="email"
-              // rules={[{ required: true, message: "Please input your email" }]}
+              rules={[
+                { required: true, message: "Please input your email" },
+                { type: "email", message: "Email is not valid!" },
+              ]}
             >
               <Input
                 prefix={<UserOutlined />}
@@ -70,9 +68,10 @@ class Login extends React.Component {
 
             <Form.Item
               name="password"
-              // rules={[
-              //   { required: true, message: "Please input your password!" },
-              // ]}
+              rules={[
+                { required: true, message: "Please input your password!" },
+                { min: 8, message: "Password must be at least 8 characters!" },
+              ]}
             >
               <Input.Password
                 prefix={<LockOutlined />}
@@ -101,15 +100,10 @@ class Login extends React.Component {
               </Flex>
             </Form.Item>
             <Form.Item>
-              <Button
-                block
-                type="primary"
-                htmlType="submit"
-                onClick={this.handleLogin}
-              >
+              <Button block type="primary" htmlType="submit">
                 Log in
               </Button>
-              or{" "}
+              Don’t have an account?{" "}
               <Link href="/register" className={styles.link}>
                 Register now!
               </Link>
@@ -121,4 +115,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, { loginUser })(withRouter(Login));
+export default connect(null, { loginUser })(withRouter(LoginPage));
