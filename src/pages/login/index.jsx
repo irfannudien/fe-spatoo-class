@@ -6,6 +6,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 import { connect } from "react-redux";
 import { loginUser } from "@/redux/actions/userAction";
+import { withRouter } from "next/router";
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,33 +14,25 @@ class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
+      rememberMe: true,
     };
   }
 
   handleLogin = async () => {
-    const { email, password } = this.state;
+    const { email, password, rememberMe } = this.state;
 
-    if (!password && !email) {
+    if (!password || !email) {
       alert("Please fill full field");
       return;
     }
 
-    if (!email) {
-      alert("Please input your email");
-      return;
-    }
-    if (!password) {
-      alert("Please input your password");
-      return;
-    }
-
-    const body = { email, password };
-
+    const body = { email, password, rememberMe };
     const result = await this.props.loginUser(body);
     console.log("RESULT LOGIN FORM", result);
+
     if (result.success) {
       this.setState({ email: "", password: "" });
-      // window.location.replace("/");
+      this.props.router.push("/");
     } else {
       alert(result.message.message);
     }
@@ -93,7 +86,14 @@ class Login extends React.Component {
             <Form.Item>
               <Flex justify="space-between" align="center">
                 <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox
+                    checked={this.state.rememberMe}
+                    onChange={(e) =>
+                      this.setState({ rememberMe: e.target.checked })
+                    }
+                  >
+                    Remember me
+                  </Checkbox>
                 </Form.Item>
                 <Link href="" className={styles.link}>
                   Forgot password
@@ -121,4 +121,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, { loginUser })(Login);
+export default connect(null, { loginUser })(withRouter(Login));

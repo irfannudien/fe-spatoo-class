@@ -4,7 +4,10 @@ const API_URL = "http://localhost:2000/api/user";
 export const getUserById = (userId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`${API_URL}/profile/${userId}`);
+      const token = localStorage.getItem("token");
+      const res = await axios.get(`${API_URL}/profile/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       // console.log("GET USER DATA PROFILE", res.data);
       return { success: true, data: res.data };
@@ -36,7 +39,10 @@ export const loginUser = (body) => {
 export const editUserData = (id, body) => {
   return async (dispatch) => {
     try {
-      const res = await axios.put(`${API_URL}/edituser/${id}`, body);
+      const token = localStorage.getItem("token");
+      const res = await axios.put(`${API_URL}/edituser/${id}`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       console.log("EDIT DATA", res.data);
       return {

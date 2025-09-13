@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import { connect } from "react-redux";
 import { getUserById, editUserData } from "@/redux/actions/userAction";
+import { jwtDecode } from "jwt-decode";
 
 class EditUserForm extends React.Component {
   constructor(props) {
@@ -13,15 +14,28 @@ class EditUserForm extends React.Component {
 
   // ======= GET USER DATA ========
   async componentDidMount() {
-    const userId = 14;
-    const result = await this.props.getUserById(userId);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
 
-    console.log("ISI RESULT.DATA getuserbyid", result.data);
+    try {
+      const decode = jwtDecode(token);
+      const userId = decode.id;
 
-    if (result.success) {
-      this.setState({ userData: result.data });
-    } else {
-      alert(result.message);
+      console.log("JWT DECODE", decode);
+
+      const result = await this.props.getUserById(userId);
+
+      console.log("ISI RESULT.DATA getuserbyid", result.data);
+
+      if (result.success) {
+        this.setState({ userData: result.data });
+      } else {
+        alert(result.message);
+      }
+    } catch (err) {
+      console.log("Token decode error", err);
     }
   }
 
