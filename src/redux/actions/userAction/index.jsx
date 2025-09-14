@@ -18,6 +18,23 @@ export const getUserById = (userId) => {
   };
 };
 
+export const registerUser = (body) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`${API_URL}/register`, body);
+      const result = res.data;
+
+      console.log("RESUL REGISTER", result);
+
+      return { success: true, result };
+    } catch (err) {
+      const errMessage =
+        err?.response?.data || "Something went wrong. Please try again.";
+      return { success: false, message: errMessage };
+    }
+  };
+};
+
 export const loginUser = (body) => {
   return async (dispatch) => {
     try {

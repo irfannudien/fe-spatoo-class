@@ -8,23 +8,75 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+import { connect } from "react-redux";
+import { registerUser } from "@/redux/actions/userAction";
+import { withRouter } from "next/router";
 
 class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: "",
+      email: "",
+      phone_number: "",
+      password: "",
+      confirm_password: "",
+    };
   }
+
+  handleRegister = async () => {
+    const { name, email, phone_number, password } = this.state;
+
+    const body = { name, email, phone_number, password };
+    const res = await this.props.registerUser(body);
+    console.log("RESULT DATA REGISTER", res);
+
+    if (res.success) {
+      this.setState({
+        name: "",
+        email: "",
+        phone_number: "",
+        password: "",
+        confirm_password: "",
+      });
+
+      this.props.notificationApi.success({
+        message: "Register",
+        description: "Register success, please login",
+      });
+
+      this.props.router.push("/login");
+    } else {
+      this.props.notificationApi.error({
+        message: "Login",
+        description: res.message?.message || res.message,
+      });
+    }
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     return (
       <div className={styles.container}>
         <Card className={styles.card} title="Register">
-          <Form name="register" style={{ maxWidth: 360 }}>
+          <Form
+            name="register"
+            style={{ maxWidth: 360 }}
+            onFinish={this.handleRegister}
+          >
             <Form.Item
               name="name"
               rules={[{ required: true, message: "Name is required" }]}
             >
-              <Input prefix={<UserOutlined />} placeholder="Name" />
+              <Input
+                name="name"
+                prefix={<UserOutlined />}
+                placeholder="Name"
+                onChange={this.handleChange}
+              />
             </Form.Item>
 
             <Form.Item
@@ -34,20 +86,30 @@ class RegisterPage extends React.Component {
                 { type: "email", message: "Invalid email format" },
               ]}
             >
-              <Input prefix={<MailOutlined />} placeholder="Email" />
+              <Input
+                name="email"
+                prefix={<MailOutlined />}
+                placeholder="Email"
+                onChange={this.handleChange}
+              />
             </Form.Item>
 
             <Form.Item
-              name="phone"
+              name="phone_number"
               rules={[
                 { required: true, message: "Phone number is required" },
                 {
-                  pattern: /^\d{8,15}/,
+                  pattern: /^\d{8,15}$/,
                   message: "Phone number must be 8-15 digits",
                 },
               ]}
             >
-              <Input prefix={<PhoneOutlined />} placeholder="Phone number" />
+              <Input
+                name="phone_number"
+                prefix={<PhoneOutlined />}
+                placeholder="Phone number"
+                onChange={this.handleChange}
+              />
             </Form.Item>
 
             <Form.Item
@@ -59,13 +121,15 @@ class RegisterPage extends React.Component {
               hasFeedback
             >
               <Input.Password
+                name="password"
                 prefix={<LockOutlined />}
                 placeholder="Password"
+                onChange={this.handleChange}
               />
             </Form.Item>
 
             <Form.Item
-              name="confirm"
+              name="confirm_password"
               dependencies={["password"]}
               rules={[
                 { required: true, message: "Confirm password is required" },
@@ -82,8 +146,10 @@ class RegisterPage extends React.Component {
               hasFeedback
             >
               <Input.Password
+                name="confirm_password"
                 prefix={<LockOutlined />}
                 placeholder="Confirm Password"
+                onChange={this.handleChange}
               />
             </Form.Item>
 
@@ -103,4 +169,4 @@ class RegisterPage extends React.Component {
   }
 }
 
-export default RegisterPage;
+export default connect(null, { registerUser })(withRouter(RegisterPage));

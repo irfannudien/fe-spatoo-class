@@ -35,7 +35,7 @@ class LoginPage extends React.Component {
     } else {
       this.props.notificationApi.error({
         message: "Login failed",
-        description: result.message.message,
+        description: result.message?.message || result.message,
       });
     }
   };
