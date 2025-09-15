@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getUserById, editUserData } from "@/redux/actions/userAction";
 import { jwtDecode } from "jwt-decode";
 
-class EditUserForm extends React.Component {
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,12 +70,18 @@ class EditUserForm extends React.Component {
     console.log("Response from BE", result.data);
 
     if (result.success) {
-      alert("User update successfully!");
       this.setState({
         userData: { ...userData, ...updatedUserData, ...updatedProfileData },
       });
+      this.props.notificationApi.success({
+        mesage: "Success",
+        description: "User update successfully!",
+      });
     } else {
-      alert(result.message);
+      this.props.notificationApi.error({
+        message: "Failed",
+        description: result.message,
+      });
     }
   };
 
@@ -88,14 +94,15 @@ class EditUserForm extends React.Component {
       <Form
         key={userData.id}
         initialValues={{
-          name: userData.name,
-          email: userData.email,
-          phone_number: userData.phone_number,
-          address: userData.address,
-          city: userData.city,
-          zip_code: userData.zip_code,
+          ...userData,
+          // name: userData.name,
+          // email: userData.email,
+          // phone_number: userData.phone_number,
+          // address: userData.address,
+          // city: userData.city,
+          // zip_code: userData.zip_code,
         }}
-        layout="vertical"
+        // layout="vertical"
         onFinish={this.handleUpdate}
       >
         <Form.Item name="name" label="Name" rules={[{ required: true }]}>
@@ -113,6 +120,18 @@ class EditUserForm extends React.Component {
         >
           <Input />
         </Form.Item>
+        <Form.Item name="address" label="Address" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="city" label="City">
+          <Input />
+        </Form.Item>
+        <Form.Item name="country" label="Country">
+          <Input />
+        </Form.Item>
+        <Form.Item name="zip_code" label="Zip Code">
+          <Input />
+        </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -124,4 +143,4 @@ class EditUserForm extends React.Component {
   }
 }
 
-export default connect(null, { getUserById, editUserData })(EditUserForm);
+export default connect(null, { getUserById, editUserData })(UserProfile);

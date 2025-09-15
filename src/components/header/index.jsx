@@ -40,6 +40,7 @@ class HeaderComponent extends React.Component {
     const isPolicyPage =
       router.pathname === "/privacy-policy" ||
       router.pathname === "/terms-of-services" ||
+      router.pathname === "/profile" ||
       router.pathname === "/";
 
     const topBarVariants = {
