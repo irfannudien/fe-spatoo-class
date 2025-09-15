@@ -3,10 +3,15 @@
 import React from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import HamburgerMenu from "../hamburger";
 import styles from "@/styles/header/Header.module.css";
+import { jwtDecode } from "jwt-decode";
+import { connect } from "react-redux";
+import { getUserById } from "@/redux/actions/userAction";
+import Image from "next/image";
+import { Dropdown, Menu } from "antd";
 
 class HeaderComponent extends React.Component {
   constructor(props) {
@@ -14,11 +19,38 @@ class HeaderComponent extends React.Component {
     this.state = {
       isScrolled: false,
       drawerVisible: false,
+
+      user: null,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.addEventListener("scroll", this.handleScrollBlur);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+
+    try {
+      const decode = jwtDecode(token);
+      const userId = decode.id;
+
+      const result = await this.props.getUserById(userId);
+
+      console.log("RESULT FROM HEADER", result.data);
+
+      if (result.success) {
+        this.setState({ user: result.data });
+      } else {
+        this.props.notificationApi.error({
+          message: "Error",
+          description: result.message,
+        });
+      }
+    } catch (err) {
+      console.log("Token decode error", err);
+    }
   }
 
   componentWillUnmount() {
@@ -33,8 +65,14 @@ class HeaderComponent extends React.Component {
     this.setState({ drawerVisible: !this.state.drawerVisible });
   };
 
+  handleLogout = () => {
+    localStorage.removeItem("token");
+    this.setState({ user: null });
+    this.props.router.push("/login");
+  };
+
   render() {
-    const { isScrolled, drawerVisible } = this.state;
+    const { isScrolled, drawerVisible, user } = this.state;
     const { router } = this.props;
 
     const isPolicyPage =
@@ -80,6 +118,28 @@ class HeaderComponent extends React.Component {
       },
     };
 
+    // ==================== ANT DESIGN MENU ====================
+    const menu = {
+      items: [
+        {
+          key: "name",
+          label: user?.name,
+        },
+        {
+          key: "profile",
+          label: <Link href="/profile">Edit Profile</Link>,
+        },
+        {
+          key: "logout",
+          label: (
+            <button onClick={this.handleLogout} style={{ cursor: "pointer" }}>
+              Logout
+            </button>
+          ),
+        },
+      ],
+    };
+
     return (
       <>
         <div
@@ -123,6 +183,30 @@ class HeaderComponent extends React.Component {
                 className={`${styles.icon} ${styles.iconShop}`}
               />
 
+              {user ? (
+                <Dropdown
+                  menu={menu}
+                  placement="bottomRight"
+                  trigger={["click"]}
+                >
+                  {user.profile_picture ? (
+                    <Image
+                      src={user.profile_picture}
+                      alt="avatar"
+                      width={40}
+                      height={40}
+                      style={{ borderRadius: "50%", cursor: "pointer" }}
+                    />
+                  ) : (
+                    <UserOutlined className={styles.icon} />
+                  )}
+                </Dropdown>
+              ) : (
+                <Link href="/login" className={styles.loginText}>
+                  Login
+                </Link>
+              )}
+
               <button
                 className={styles.hamburgerButton}
                 onClick={this.toggleDrawer}
@@ -153,4 +237,4 @@ class HeaderComponent extends React.Component {
   }
 }
 
-export default withRouter(HeaderComponent);
+export default connect(null, { getUserById })(withRouter(HeaderComponent));

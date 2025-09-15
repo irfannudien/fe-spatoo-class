@@ -8,7 +8,11 @@ export const getProductData = () => {
       const res = await axios.get("http://localhost:2000/api/products");
 
       console.log("DATAAAAAAA", res.data);
-      return { success: true, message: "Get product data success" };
+      return {
+        success: true,
+        data: res.data,
+        message: "Get product data success",
+      };
     } catch (err) {
       const errMessage = err?.response?.data || "Error get product data";
       return { success: false, message: errMessage };

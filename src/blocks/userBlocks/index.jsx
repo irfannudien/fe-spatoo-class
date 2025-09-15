@@ -32,13 +32,17 @@ class UserProfile extends React.Component {
       if (result.success) {
         this.setState({ userData: result.data });
       } else {
-        alert(result.message);
+        this.props.notificationApi.error({
+          message: "Error get data",
+          description: result.mesage,
+        });
       }
     } catch (err) {
       console.log("Token decode error", err);
     }
   }
 
+  // ======= UPDATE USER DATA ========
   handleUpdate = async (values) => {
     const { userData } = this.state;
     const userId = userData.users_id;
@@ -105,22 +109,18 @@ class UserProfile extends React.Component {
         // layout="vertical"
         onFinish={this.handleUpdate}
       >
-        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+        <Form.Item name="name" label="Name">
           <Input />
         </Form.Item>
 
-        <Form.Item name="email" label="Email" rules={[{ required: true }]}>
+        <Form.Item name="email" label="Email">
           <Input />
         </Form.Item>
 
-        <Form.Item
-          name="phone_number"
-          label="Phone number"
-          rules={[{ required: true }]}
-        >
+        <Form.Item name="phone_number" label="Phone number">
           <Input />
         </Form.Item>
-        <Form.Item name="address" label="Address" rules={[{ required: true }]}>
+        <Form.Item name="address" label="Address">
           <Input />
         </Form.Item>
         <Form.Item name="city" label="City">
