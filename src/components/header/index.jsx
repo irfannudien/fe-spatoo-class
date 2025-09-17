@@ -79,6 +79,7 @@ class HeaderComponent extends React.Component {
       router.pathname === "/privacy-policy" ||
       router.pathname === "/terms-of-services" ||
       router.pathname === "/profile" ||
+      router.pathname === "/products" ||
       router.pathname === "/";
 
     const topBarVariants = {

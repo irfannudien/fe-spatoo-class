@@ -35,6 +35,22 @@ export const registerUser = (body) => {
   };
 };
 
+export const verifyEmail = (token) => {
+  return async (dispatch) => {
+    try {
+      console.log("TOKEN ACTIONS", token);
+      const res = await axios.post(`${API_URL}/verify-email?token=${token}`);
+      const result = res.data;
+      console.log("DATA VERIFY EMAIL TOKEN", result);
+
+      return { success: true, result };
+    } catch (err) {
+      const errMessage = err?.response?.data || "Error verify email";
+      return { success: false, message: errMessage };
+    }
+  };
+};
+
 export const loginUser = (body) => {
   return async (dispatch) => {
     try {
