@@ -1,4 +1,4 @@
-import { verifyEmail } from "@/redux/actions/userAction";
+import { resendToken, verifyEmail } from "@/redux/actions/userAction";
 import { Button } from "antd";
 import Link from "next/link";
 import React from "react";
@@ -9,6 +9,8 @@ class VerifyEmailPage extends React.Component {
     super(props);
     this.state = {
       isVerified: false,
+      email: "",
+      resendMessage: "",
     };
   }
 
@@ -23,7 +25,25 @@ class VerifyEmailPage extends React.Component {
     console.log("RESULT TOKEN", result);
 
     if (result.success) {
-      this.setState({ isVerified: true });
+      this.setState({ isVerified: true, email: result.data.email });
+    }
+  };
+
+  handleResendToken = async () => {
+    try {
+      const { email } = this.state;
+      console.log("EMAIL STATE", this.state.email);
+
+      const result = await this.props.resendToken(email);
+
+      if (result.success) {
+        this.setState({ resendMessage: "Token baru sudah dikirim ke email!" });
+      } else {
+        this.setState({ resendMessage: "Gagal kirim ulang token." });
+      }
+    } catch (err) {
+      console.error(err);
+      this.setState({ resendMessage: "Terjadi kesalahan." });
     }
   };
 
@@ -43,18 +63,24 @@ class VerifyEmailPage extends React.Component {
   }
 
   renderNotVerified() {
+    const { resendMessage } = this.state;
     return (
       <div>
         <h1>Email Not Verified</h1>
-        <Button>Resend Email</Button>
+        <Button onClick={() => this.handleResendToken()}>Resend Email</Button>
+        {resendMessage && <p>{resendMessage}</p>}
       </div>
     );
   }
 
   render() {
     const { isVerified } = this.state;
-    return <>{isVerified ? this.renderVerified() : this.renderNotVerified()}</>;
+    return (
+      <div style={{ padding: "100px 20px" }}>
+        {isVerified ? this.renderVerified() : this.renderNotVerified()}
+      </div>
+    );
   }
 }
 
-export default connect(null, { verifyEmail })(VerifyEmailPage);
+export default connect(null, { verifyEmail, resendToken })(VerifyEmailPage);

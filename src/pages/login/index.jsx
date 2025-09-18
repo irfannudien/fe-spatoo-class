@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
     this.state = {
       email: "",
       password: "",
-      rememberMe: true,
+      rememberMe: false,
     };
   }
 
@@ -46,7 +46,7 @@ class LoginPage extends React.Component {
         <Card className={styles.card} title="Login">
           <Form
             name="login"
-            initialValues={{ remember: true }}
+            initialValues={{ remember: false }}
             style={{ maxWidth: 360 }}
             onFinish={this.handleLogin}
           >

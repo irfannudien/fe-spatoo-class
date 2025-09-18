@@ -1,11 +1,12 @@
 import axios from "axios";
-const API_URL = "http://localhost:2000/api/user";
+const API_URL_USER = "http://localhost:2000/api/user";
+const API_URL_AUTH = "http://localhost:2000/api/auth";
 
 export const getUserById = (userId) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`${API_URL}/profile/${userId}`, {
+      const res = await axios.get(`${API_URL_USER}/profile/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -21,7 +22,7 @@ export const getUserById = (userId) => {
 export const registerUser = (body) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`${API_URL}/register`, body);
+      const res = await axios.post(`${API_URL_AUTH}/register`, body);
       const result = res.data;
 
       console.log("RESUL REGISTER", result);
@@ -39,13 +40,30 @@ export const verifyEmail = (token) => {
   return async (dispatch) => {
     try {
       console.log("TOKEN ACTIONS", token);
-      const res = await axios.post(`${API_URL}/verify-email?token=${token}`);
+      const res = await axios.post(
+        `${API_URL_AUTH}/verify-email?token=${token}`
+      );
+      const data = res.data;
+      console.log("DATA VERIFY EMAIL TOKEN", data);
+
+      return { success: true, data };
+    } catch (err) {
+      const errMessage = err?.response?.data || "Error verify email";
+      return { success: false, message: errMessage };
+    }
+  };
+};
+
+export const resendToken = (email) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`${API_URL_AUTH}/resend-token`, { email });
       const result = res.data;
-      console.log("DATA VERIFY EMAIL TOKEN", result);
+      console.log("RESULT RESEND TOKEN", result);
 
       return { success: true, result };
     } catch (err) {
-      const errMessage = err?.response?.data || "Error verify email";
+      const errMessage = err?.response?.data || "Error resend token";
       return { success: false, message: errMessage };
     }
   };
@@ -54,7 +72,7 @@ export const verifyEmail = (token) => {
 export const loginUser = (body) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`${API_URL}/login`, body);
+      const res = await axios.post(`${API_URL_AUTH}/login`, body);
       const result = res.data.data;
 
       console.log("Response Login Data", res.data);
@@ -74,7 +92,7 @@ export const editUserData = (id, body) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.put(`${API_URL}/edituser/${id}`, body, {
+      const res = await axios.put(`${API_URL_USER}/edituser/${id}`, body, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
