@@ -11,6 +11,9 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { registerUser } from "@/redux/actions/userAction";
 import { withRouter } from "next/router";
+import CardWrapper from "@/components/cardWrapper";
+import FormField from "@/components/formField";
+import FormButton from "@/components/formButton";
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -60,111 +63,174 @@ class RegisterPage extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        <Card className={styles.card} title="Register">
-          <Form
-            name="register"
-            style={{ maxWidth: 360 }}
-            onFinish={this.handleRegister}
+      <CardWrapper title="Register">
+        <Form
+          name="register"
+          style={{ maxWidth: 360 }}
+          // onFinish={this.handleRegister}
+        >
+          <FormField
+            name="name"
+            rules={[{ required: true, message: "Name is required" }]}
+            prefix={<UserOutlined />}
+            placeholder="Name"
+            onChange={this.handleChange}
+          />
+
+          <FormField
+            name="email"
+            placeholder="Email"
+            prefix={<MailOutlined />}
+            onChange={this.handleChange}
+            rules={[
+              { required: true, message: "Email is required" },
+              { type: "email", message: "Invalid email format!" },
+            ]}
+          />
+
+          <FormField
+            name="phone_number"
+            placeholder="Phone number"
+            prefix={<PhoneOutlined />}
+            onChange={this.handleChange}
+            rules={[
+              { required: true, message: "Phone number is required" },
+              {
+                pattern: /^\d{8,15}$/,
+                message: "Phone number must be 8-15 digits",
+              },
+            ]}
+          />
+
+          <FormField
+            name="password"
+            type="password"
+            placeholder="Password"
+            prefix={<LockOutlined />}
+            onChange={this.handleChange}
+            rules={[
+              { required: true, message: "Password is required" },
+              {
+                min: 8,
+                message: "Password must be at least 8 characters!",
+              },
+            ]}
+            hasFeedback
+          />
+
+          <FormField
+            name="confirm_password"
+            type="password"
+            placeholder="Confirm password"
+            prefix={<LockOutlined />}
+            onChange={this.handleChange}
+            confirmPassword
+          />
+
+          <FormButton
+            title="Register"
+            linkHref="/login"
+            linkText="Login"
+            extraText="Already have an account?"
+          />
+
+          {/* <Form.Item
+            name="name"
+            rules={[{ required: true, message: "Name is required" }]}
           >
-            <Form.Item
+            <Input
               name="name"
-              rules={[{ required: true, message: "Name is required" }]}
-            >
-              <Input
-                name="name"
-                prefix={<UserOutlined />}
-                placeholder="Name"
-                onChange={this.handleChange}
-              />
-            </Form.Item>
+              prefix={<UserOutlined />}
+              placeholder="Name"
+              onChange={this.handleChange}
+            />
+          </Form.Item> */}
 
-            <Form.Item
+          {/* <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: "Email is required" },
+              { type: "email", message: "Invalid email format" },
+            ]}
+          >
+            <Input
               name="email"
-              rules={[
-                { required: true, message: "Email is required" },
-                { type: "email", message: "Invalid email format" },
-              ]}
-            >
-              <Input
-                name="email"
-                prefix={<MailOutlined />}
-                placeholder="Email"
-                onChange={this.handleChange}
-              />
-            </Form.Item>
+              prefix={<MailOutlined />}
+              placeholder="Email"
+              onChange={this.handleChange}
+            />
+          </Form.Item> */}
 
-            <Form.Item
+          {/* <Form.Item
+            name="phone_number"
+            rules={[
+              { required: true, message: "Phone number is required" },
+              {
+                pattern: /^\d{8,15}$/,
+                message: "Phone number must be 8-15 digits",
+              },
+            ]}
+          >
+            <Input
               name="phone_number"
-              rules={[
-                { required: true, message: "Phone number is required" },
-                {
-                  pattern: /^\d{8,15}$/,
-                  message: "Phone number must be 8-15 digits",
-                },
-              ]}
-            >
-              <Input
-                name="phone_number"
-                prefix={<PhoneOutlined />}
-                placeholder="Phone number"
-                onChange={this.handleChange}
-              />
-            </Form.Item>
+              prefix={<PhoneOutlined />}
+              placeholder="Phone number"
+              onChange={this.handleChange}
+            />
+          </Form.Item> */}
 
-            <Form.Item
+          {/* <Form.Item
+            name="password"
+            rules={[
+              { required: true, message: "Password is required" },
+              { min: 8, message: "Password must be at least 8 characters" },
+            ]}
+            hasFeedback
+          >
+            <Input.Password
               name="password"
-              rules={[
-                { required: true, message: "Password is required" },
-                { min: 8, message: "Password must be at least 8 characters" },
-              ]}
-              hasFeedback
-            >
-              <Input.Password
-                name="password"
-                prefix={<LockOutlined />}
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-            </Form.Item>
+              prefix={<LockOutlined />}
+              placeholder="Password"
+              onChange={this.handleChange}
+            />
+          </Form.Item> */}
 
-            <Form.Item
+          {/* <Form.Item
+            name="confirm_password"
+            dependencies={["password"]}
+            rules={[
+              { required: true, message: "Confirm password is required" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  } else {
+                    return Promise.reject(new Error("Password do not match"));
+                  }
+                },
+              }),
+            ]}
+            hasFeedback
+          >
+            <Input.Password
               name="confirm_password"
-              dependencies={["password"]}
-              rules={[
-                { required: true, message: "Confirm password is required" },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    } else {
-                      return Promise.reject(new Error("Password do not match"));
-                    }
-                  },
-                }),
-              ]}
-              hasFeedback
-            >
-              <Input.Password
-                name="confirm_password"
-                prefix={<LockOutlined />}
-                placeholder="Confirm Password"
-                onChange={this.handleChange}
-              />
-            </Form.Item>
+              prefix={<LockOutlined />}
+              placeholder="Confirm Password"
+              onChange={this.handleChange}
+            />
+          </Form.Item> */}
 
-            <Form.Item>
-              <Button block type="primary" htmlType="submit">
-                Register
-              </Button>
-              Already have an account?{" "}
-              <Link href="/login" className={styles.link}>
-                Login
-              </Link>
-            </Form.Item>
-          </Form>
-        </Card>
-      </div>
+          {/* <Form.Item>
+            <Button block type="primary" htmlType="submit">
+              Register
+            </Button>
+            Already have an account?{" "}
+            <Link href="/login" className={styles.link}>
+              Login
+            </Link>
+          </Form.Item> */}
+        </Form>
+      </CardWrapper>
     );
   }
 }
