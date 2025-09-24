@@ -27,10 +27,17 @@ class RegisterPage extends React.Component {
     };
   }
 
-  handleRegister = async () => {
+  handleRegister = async (values) => {
     const { name, email, phone_number, password } = this.state;
 
-    const body = { name, email, phone_number, password };
+    const body = {
+      name: values.name,
+      email: values.email,
+      phone_number: values.phone_number,
+      password: values.password,
+    };
+    // const body = { name, email, phone_number, password };
+
     const res = await this.props.registerUser(body);
     console.log("RESULT DATA REGISTER", res);
 
@@ -67,7 +74,7 @@ class RegisterPage extends React.Component {
         <Form
           name="register"
           style={{ maxWidth: 360 }}
-          // onFinish={this.handleRegister}
+          onFinish={this.handleRegister}
         >
           <FormField
             name="name"
@@ -90,6 +97,7 @@ class RegisterPage extends React.Component {
 
           <FormField
             name="phone_number"
+            type="number"
             placeholder="Phone number"
             prefix={<PhoneOutlined />}
             onChange={this.handleChange}
@@ -133,8 +141,16 @@ class RegisterPage extends React.Component {
             linkText="Login"
             extraText="Already have an account?"
           />
+        </Form>
+      </CardWrapper>
+    );
+  }
+}
 
-          {/* <Form.Item
+export default connect(null, { registerUser })(withRouter(RegisterPage));
+
+{
+  /* <Form.Item
             name="name"
             rules={[{ required: true, message: "Name is required" }]}
           >
@@ -144,9 +160,11 @@ class RegisterPage extends React.Component {
               placeholder="Name"
               onChange={this.handleChange}
             />
-          </Form.Item> */}
+          </Form.Item> */
+}
 
-          {/* <Form.Item
+{
+  /* <Form.Item
             name="email"
             rules={[
               { required: true, message: "Email is required" },
@@ -159,9 +177,11 @@ class RegisterPage extends React.Component {
               placeholder="Email"
               onChange={this.handleChange}
             />
-          </Form.Item> */}
+          </Form.Item> */
+}
 
-          {/* <Form.Item
+{
+  /* <Form.Item
             name="phone_number"
             rules={[
               { required: true, message: "Phone number is required" },
@@ -177,9 +197,11 @@ class RegisterPage extends React.Component {
               placeholder="Phone number"
               onChange={this.handleChange}
             />
-          </Form.Item> */}
+          </Form.Item> */
+}
 
-          {/* <Form.Item
+{
+  /* <Form.Item
             name="password"
             rules={[
               { required: true, message: "Password is required" },
@@ -193,9 +215,11 @@ class RegisterPage extends React.Component {
               placeholder="Password"
               onChange={this.handleChange}
             />
-          </Form.Item> */}
+          </Form.Item> */
+}
 
-          {/* <Form.Item
+{
+  /* <Form.Item
             name="confirm_password"
             dependencies={["password"]}
             rules={[
@@ -218,9 +242,11 @@ class RegisterPage extends React.Component {
               placeholder="Confirm Password"
               onChange={this.handleChange}
             />
-          </Form.Item> */}
+          </Form.Item> */
+}
 
-          {/* <Form.Item>
+{
+  /* <Form.Item>
             <Button block type="primary" htmlType="submit">
               Register
             </Button>
@@ -228,11 +254,5 @@ class RegisterPage extends React.Component {
             <Link href="/login" className={styles.link}>
               Login
             </Link>
-          </Form.Item> */}
-        </Form>
-      </CardWrapper>
-    );
-  }
+          </Form.Item> */
 }
-
-export default connect(null, { registerUser })(withRouter(RegisterPage));

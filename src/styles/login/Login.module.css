@@ -11,9 +11,27 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  z-index: 2;
+  height: 500px;
+  width: 60%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.imgForm {
+  background: url("/assets/bg/form-auth.jpg") center/cover no-repeat;
+  z-index: 2;
+  align-self: stretch;
+  flex: 1;
 }
 
 .card {
@@ -21,6 +39,14 @@
   width: 350px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 2;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardTitle {
+  font-size: 32px;
 }
 
 .link {

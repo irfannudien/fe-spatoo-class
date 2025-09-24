@@ -22,14 +22,14 @@ class LoginPage extends React.Component {
     };
   }
 
-  handleLogin = async () => {
-    const { email, password, rememberMe } = this.state;
-    const body = { email, password, rememberMe };
-    // const body = {
-    //   email: values.email,
-    //   password: values.password,
-    //   rememberMe: values.remember,
-    // };
+  handleLogin = async (values) => {
+    // const { email, password, rememberMe } = this.state;
+    // const body = { email, password, rememberMe };
+    const body = {
+      email: values.email,
+      password: values.password,
+      rememberMe: values.remember,
+    };
     const result = await this.props.loginUser(body);
     console.log("RESULT LOGIN FORM", result);
 
@@ -62,7 +62,7 @@ class LoginPage extends React.Component {
           name="login"
           initialValues={{ remember: false }}
           style={{ maxWidth: 360 }}
-          // onFinish={this.handleLogin}
+          onFinish={this.handleLogin}
         >
           <FormField
             name="email"
@@ -73,12 +73,12 @@ class LoginPage extends React.Component {
             prefix={<MailOutlined />}
             placeholder="Email"
             onChange={this.handleChange}
-            value={this.state.email}
+            // value={this.state.email}
           />
 
           <FormField
             name="password"
-            value={this.state.password}
+            // value={this.state.password}
             rules={[
               { required: true, message: "Please input your password" },
               {
@@ -94,7 +94,7 @@ class LoginPage extends React.Component {
 
           <FormField
             name="remember"
-            checked={this.state.rememberMe}
+            // checked={this.state.rememberMe}
             type="checkbox"
             placeholder="Remember me"
             onChange={this.handleChecked}
@@ -105,7 +105,7 @@ class LoginPage extends React.Component {
             linkHref="/register"
             extraText="Don't have an account?"
             linkText="Register now!"
-            onClick={this.handleLogin}
+            // onClick={this.handleLogin}
           />
         </Form>
       </CardWrapper>

@@ -26,7 +26,7 @@ class FormField extends React.Component {
       return (
         <Form.Item>
           <Flex justify="space-between" align="center">
-            <Form.Item valuePropName="checked" noStyle>
+            <Form.Item name={name} valuePropName="checked" noStyle>
               <Checkbox checked={checked} onChange={onChange}>
                 {placeholder}
               </Checkbox>
@@ -42,6 +42,7 @@ class FormField extends React.Component {
     if (confirmPassword) {
       return (
         <Form.Item
+          name={name}
           dependencies={["password"]}
           rules={[
             { required: true, message: "Confirm password is required" },
@@ -62,20 +63,20 @@ class FormField extends React.Component {
             prefix={prefix}
             placeholder={placeholder}
             onChange={onChange}
-            value={value}
+            // value={value}
           />
         </Form.Item>
       );
     }
     return (
-      <Form.Item rules={rules} hasFeedback={hasFeedback}>
+      <Form.Item name={name} rules={rules} hasFeedback={hasFeedback}>
         {type === "password" ? (
           <Input.Password
             name={name}
             prefix={prefix}
             placeholder={placeholder}
             onChange={onChange}
-            value={value}
+            // value={value}
           />
         ) : (
           <Input
@@ -83,7 +84,7 @@ class FormField extends React.Component {
             prefix={prefix}
             placeholder={placeholder}
             onChange={onChange}
-            value={value}
+            // value={value}
           />
         )}
       </Form.Item>

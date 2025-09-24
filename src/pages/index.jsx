@@ -20,11 +20,6 @@ class Homepage extends React.Component {
       >
         <h1>Homepage</h1>
         <NewsletterBlocks />
-        {/* <div style={{ width: "30%" }}>
-          <Input placeholder="Email" prefix={<UserOutlined />} />
-          <Input.Password />
-          <Button type="primary">Sign in</Button>
-        </div> */}
       </div>
     );
   }

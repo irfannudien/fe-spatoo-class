@@ -18,7 +18,7 @@ class FormButton extends React.Component {
     } = this.props;
     return (
       <Form.Item>
-        <Button block type={type} onClick={onClick}>
+        <Button block type={type} onClick={onClick} htmlType="submit">
           {title}
         </Button>
 
